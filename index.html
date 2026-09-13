@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavanda Restoranı - Menyu</title>
+  
+  <!-- Loqo üçün xüsusi Google şriftləri -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@800&display=swap">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* RESTORAN LOQOSU VƏ YAŞIL FON STİLİ */
+    .header {
+      background: radial-gradient(circle, rgba(74,124,44,0.95) 0%, rgba(34,60,20,1) 100%);
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 4px solid #ff66aa;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .logo-container {
+      display: inline-block;
+    }
+
+    .logo-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 55px;
+      color: #ff66aa;
+      -webkit-text-stroke: 2px #ffffff;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 102, 170, 0.6),
+        3px 5px 0px rgba(0, 0, 0, 0.3);
+      margin: 0;
+      line-height: 1;
+    }
+
+    .logo-subtext {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      color: #ff66aa;
+      background-color: #ffffff;
+      padding: 3px 14px;
+      border-radius: 4px;
+      letter-spacing: 4px;
+      display: inline-block;
+      margin-top: 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* MENYU KONTEYNERİ */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      color: #2b4c13;
+      border-bottom: 2px solid #ff66aa;
+      padding-bottom: 8px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* KART STİLLƏRİ */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #27ae60;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    /* SEÇİM DROPDOWNU STİLİ */
+    .option-group {
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .option-group label {
+      font-size: 13px;
+      font-weight: bold;
+      color: #444;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .option-dropdown {
+      width: 100%;
+      padding: 9px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      background-color: #fafafa;
+      color: #333;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .option-dropdown:focus {
+      border-color: #ff66aa;
+    }
+
+    /* DÜYMƏ STİLİ */
+    .add-btn {
+      background-color: #ff66aa;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .add-btn:hover {
+      background-color: #e05595;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- RESTORAN LOQOSU -->
+  <header class="header">
+    <div class="logo-container">
+      <h1 class="logo-text">Lavanda</h1>
+      <span class="logo-subtext">RESTORAN</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- BÖLMƏ: XÜSUSİ SETLƏR (SEÇİMLİ) -->
+    <h2 class="section-title">Xüsusi Setlər</h2>
+    <div class="menu-grid">
+
+      <!-- Set 1 -->
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Kabab Seti</h3>
+            <span class="price">25 AZN</span>
+          </div>
+          <p class="description">Tikə kabab, Lülə kabab, Tikə toyuq, Məngal salatı, Çörək.</p>
+          
+          <div class="option-group">
+            <label for="drink-1">İçki seçimi:</label>
+            <select id="drink-1" class="option-dropdown">
+              <option value="water">Mərcan Su 0.5L (Daxildir)</option>
+              <option value="cola">Coca-Cola 0.5L (+0.50 AZN)</option>
+              <option value="lemonade">Ev Limonadı (+1.50 AZN)</option>
+              <option value="ayran">Ayran (Daxildir)</option>
+            </select>
+          </div>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+      <!-- Set 2 -->
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Ailəvi Aşam Seti</h3>
+            <span class="price">45 AZN</span>
+          </div>
+          <p class="description">Qarışıq Kabab çeşidləri, Paytaxt salatı, Çoban salatı, Turşu çeşidləri.</p>
+          
+          <div class="option-group">
+            <label for="drink-2">Böyük İçki seçimi:</label>
+            <select id="drink-2" class="option-dropdown">
+              <option value="cola-1l">Coca-Cola 1L (Daxildir)</option>
+              <option value="duchesse-1l">Düşes 1L (Daxildir)</option>
+              <option value="kompot-1l">Ev Kompotu 1L (+1.00 AZN)</option>
+            </select>
+          </div>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+    </div>
+
+    <!-- BÖLMƏ: ANA YEMƏKLƏR -->
+    <h2 class="section-title">Ana Yeməklər</h2>
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Lülə Kabab</h3>
+            <span class="price">8 AZN</span>
+          </div>
+          <p class="description">Xüsusi ədviyyatlı quzu ətindən hazırlanmış lülə.</p>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Yarpaq Xəngəli</h3>
+            <span class="price">7 AZN</span>
+          </div>
+          <p class="description">Qıymə ət, kərə yağı və qatıq ilə servis edilir.</p>
+          
+          <div class="option-group">
+            <label for="side-1">Sous seçimi:</label>
+            <select id="side-1" class="option-dropdown">
+              <option value="qatiq">Sarımsaqlı Qatıq</option>
+              <option value="sade">Sade Qatıq</option>
+            </select>
+          </div>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Sac İçi (Quzu)</h3>
+            <span class="price">22 AZN</span>
+          </div>
+          <p class="description">Tərəvəzlər və kərə yağında qızardılmış quzu əti.</p>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+    </div>
+
+    <!-- BÖLMƏ: İÇKİLƏR -->
+    <h2 class="section-title">İçkilər</h2>
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Mərcan Su 0.5L</h3>
+            <span class="price">1 AZN</span>
+          </div>
+          <p class="description">Qazsız və ya Qazlı mənşə suyu.</p>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+      <div class="menu-card">
+        <div>
+          <div class="card-header">
+            <h3 class="card-title">Ev Yapımı Limonad</h3>
+            <span class="price">3 AZN</span>
+          </div>
+          <p class="description">Təbii limon və nanə yarpaqları ilə.</p>
+        </div>
+        <button class="add-btn">Sifariş Et</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
