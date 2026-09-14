@@ -22,7 +22,6 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Ümumi Konteyner Layout */
 .layout-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -32,7 +31,6 @@ header {
     align-items: flex-start;
 }
 
-/* Sol və Sağ Şəkil Bannerləri */
 .side-banner {
     width: 220px;
     flex-shrink: 0;
@@ -51,10 +49,39 @@ header {
     border: 2px solid #fff;
 }
 
-/* Mərkəzi Menyu Hissəsi */
 .main-content {
     flex: 1;
     min-width: 0;
+}
+
+/* Filtr və Axtarış Stil Sahəsi */
+.filter-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+}
+.cat-btns {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+.cat-btn {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #6b3fa0;
+    background: #fff;
+    color: #6b3fa0;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.cat-btn.active {
+    background: #6b3fa0;
+    color: #fff;
 }
 
 .cat {
@@ -76,6 +103,18 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eee;
 }
 .item button.add-btn {
     background: #6b3fa0;
@@ -121,7 +160,7 @@ header {
     background: #fff;
     border: 2px solid #6b3fa0;
 }
-input, textarea {
+input, textarea, select {
     width: 100%;
     box-sizing: border-box;
     padding: 12px;
@@ -157,7 +196,6 @@ textarea {
     cursor: pointer;
 }
 
-/* Mobil Ekranlar Üçün Uyğunlaşdırma */
 @media (max-width: 900px) {
     .layout-container {
         flex-direction: column;
@@ -186,20 +224,30 @@ textarea {
 
 <div class="layout-container">
 
-    <!-- SOL ŞƏKİL BANNERİ -->
     <div class="side-banner">
-        <!-- Öz istədiyiniz şəkillərin linklərini src hissəsinə qoya bilərsiniz -->
         <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500" alt="Restoran">
         <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Kabablar">
     </div>
 
-    <!-- ƏSAS MENYU HİSSƏSİ -->
     <div class="main-content">
+        <!-- AXTARIŞ VƏ FİLTR SİSTEMİ -->
+        <div class="filter-box">
+            <input type="text" id="searchInput" onkeyup="menu()" placeholder="🔍 Yemək və ya içki axtarın...">
+            <div id="categoryButtons" class="cat-btns"></div>
+        </div>
+
         <div id="menu"></div>
 
         <div class="cart">
             <h2 style="margin-top:0;color:#6b3fa0;">🛒 Sifarişiniz</h2>
             <div id="cart">Səbət boşdur.</div>
+            
+            <label style="display:block; margin-top:12px; font-weight:bold;">Çatdırılma zonası:</label>
+            <select id="deliveryZone" onchange="cart()">
+                <option value="0">Şəhərdaxili (Pulsuz)</option>
+                <option value="2">Şəhərdən kənar (+2.00 AZN)</option>
+            </select>
+
             <h3 id="total" style="color:#222;">Cəmi: 0.00 AZN</h3>
             
             <input id="name" placeholder="Adınız və Soyadınız">
@@ -211,7 +259,6 @@ textarea {
         </div>
     </div>
 
-    <!-- SAĞ ŞƏKİL BANNERİ -->
     <div class="side-banner">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500" alt="Restoran">
         <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Burger">
@@ -221,7 +268,9 @@ textarea {
 
 <script>
 const phone="994558886383";
+let selectedCategory = "Hamısı";
 
+// Qeyd: Yeməyin sonuna 4-cü element kimi xüsusi şəkil linki yaza bilərsiniz
 const p=[
     // Setlər
     ["Menyu Setləri","Səhər yeməyi SET (1 nəfərlik)",10.00],
@@ -426,20 +475,63 @@ const p=[
 
 let c={};
 
+// İş saatı yoxlanışı (10:00 - 23:00)
+function isRestaurantOpen() {
+    const hour = new Date().getHours();
+    return hour >= 10 && hour < 23;
+}
+
+// Kateqoriya düymələrinin renderi
+function renderCategories() {
+    let cats = ["Hamısı", ...new Set(p.map(x=>x[0]))];
+    document.querySelector("#categoryButtons").innerHTML = cats.map(cat => 
+        <button class="cat-btn ${selectedCategory === cat ? 'active' : ''}" onclick="selectCategory('${cat}')">${cat}</button>
+    ).join("");
+}
+
+function selectCategory(cat) {
+    selectedCategory = cat;
+    renderCategories();
+    menu();
+}
+
 function menu(){
-    let cats=[...new Set(p.map(x=>x[0]))];
-    document.querySelector("#menu").innerHTML=cats.map(cat=>
-        '<div class="cat">'+cat+'</div>'+
-        p.map((x,i)=>{
-            if(x[0]!=cat) return '';
+    let search = document.querySelector("#searchInput").value.toLowerCase();
+    let cats = [...new Set(p.map(x=>x[0]))];
+    let html = "";
+
+    cats.forEach(cat => {
+        if (selectedCategory !== "Hamısı" && selectedCategory !== cat) return;
+
+        let itemsHtml = p.map((x,i)=>{
+            if(x[0] !== cat) return '';
+            if(search && !x[1].toLowerCase().includes(search)) return '';
+
             let qty = c[i] || 0;
+            let imgUrl = x[3] || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100'; // Standart şəkil
             let btnHtml = qty > 0 
                 ? '<div class="counter"><button onclick="minus('+i+')">−</button><span>'+qty+'</span><button onclick="add('+i+')">+</button></div>'
                 : '<button class="add-btn" onclick="add('+i+')">+ Əlavə et</button>';
             
-            return '<div class="item"><span><b>'+x[1]+'</b><br>'+x[2].toFixed(2)+' AZN</span>'+btnHtml+'</div>';
-        }).join("")
-    ).join("");
+            return `
+                <div class="item">
+                    <div class="item-info">
+                        <img src="${imgUrl}" class="item-img" alt="${x[1]}">
+                        <div>
+                            <b>${x[1]}</b><br>
+                            <span>${x[2].toFixed(2)} AZN</span>
+                        </div>
+                    </div>
+                    ${btnHtml}
+                </div>`;
+        }).join("");
+
+        if (itemsHtml.trim() !== "") {
+            html += '<div class="cat">'+cat+'</div>' + itemsHtml;
+        }
+    });
+
+    document.querySelector("#menu").innerHTML = html || '<div style="padding:15px; text-align:center;">Heç bir məhsul tapılmadı.</div>';
 }
 
 function add(i){
@@ -459,38 +551,66 @@ function minus(i){
 }
 
 function cart(){
-    let s="",t=0;
+    let s="", t=0;
     Object.keys(c).forEach(i=>{
-        let x=p[i],q=c[i],v=x[2]*q;
+        let x=p[i], q=c[i], v=x[2]*q;
         t+=v;
         s+=x[1]+" — "+q+" ədəd — "+v.toFixed(2)+" AZN <button class='minus-btn' onclick='minus("+i+")'>−</button><br>";
     });
+
+    let deliveryFee = parseFloat(document.querySelector("#deliveryZone").value) || 0;
+    let grandTotal = t + (t > 0 ? deliveryFee : 0);
+
     document.querySelector("#cart").innerHTML=s||"Səbət boşdur.";
-    document.querySelector("#total").innerText="Cəmi: "+t.toFixed(2)+" AZN";
+    
+    let totalText = "Cəmi: " + grandTotal.toFixed(2) + " AZN";
+    if (t > 0 && deliveryFee > 0) {
+        totalText += " (Ədəd: " + t.toFixed(2) + " + Çatdırılma: " + deliveryFee.toFixed(2) + " AZN)";
+    }
+    document.querySelector("#total").innerText = totalText;
 }
 
 function send(){
+    if(!isRestaurantOpen()) {
+        return alert("Hal-hazırda restoranımız bağlıdır! İş saatları: 10:00 - 23:00");
+    }
+
     let n=document.querySelector("#name").value.trim(),
         cp=document.querySelector("#customer_phone").value.trim(),
         a=document.querySelector("#address").value.trim(),
         note=document.querySelector("#note").value.trim(),
         keys=Object.keys(c);
 
-    if(!keys.length)return alert("Əvvəlcə məhsul seçin.");
-    if(!n||!cp||!a)return alert("Zəhmət olmasa Adınızı, Əlaqə nömrənizi və Ünvanı daxil edin.");
+    if(!keys.length) return alert("Əvvəlcə məhsul seçin.");
+    if(!n||!cp||!a) return alert("Zəhmət olmasa Adınızı, Əlaqə nömrənizi və Ünvanı daxil edin.");
 
-    let t=0,m="Salam, Lavanda Restorandan sifariş vermək istəyirəm.\n\n";
+    let t=0, m="Salam, Lavanda Restorandan sifariş vermək istəyirəm.\n\n";
     keys.forEach(i=>{
-        let x=p[i],q=c[i];
+        let x=p[i], q=c[i];
         t+=x[2]*q;
         m+=x[1]+" — "+q+" ədəd — "+(x[2]*q).toFixed(2)+" AZN\n";
     });
-    m+="\nCəmi: "+t.toFixed(2)+" AZN\nAd: "+n+"\nNömrə: "+cp+"\nÜnvan: "+a;"
-if(t < 5){
-        alert("Minimum sifariş məbləği 5 AZN təşkil etməlidir.");
-        return;
+
+    if(t < 5) {
+        return alert("Minimum sifariş məbləği 5 AZN təşkil etməlidir.");
     }
-menu();cart();
+
+    let deliveryFee = parseFloat(document.querySelector("#deliveryZone").value) || 0;
+    let grandTotal = t + deliveryFee;
+
+    if (deliveryFee > 0) {
+        m += "\nÇatdırılma haqqı: " + deliveryFee.toFixed(2) + " AZN";
+    }
+
+    m+="\nYekun Məbləğ: "+grandTotal.toFixed(2)+" AZN\nAd: "+n+"\nNömrə: "+cp+"\nÜnvan: "+a;
+    if(note) m+="\nQeyd: "+note;
+
+    location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(m);
+}
+
+renderCategories();
+menu();
+cart();
 </script>
 </body>
 </html>
