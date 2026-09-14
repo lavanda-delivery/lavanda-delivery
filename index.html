@@ -486,11 +486,10 @@ function send(){
         m+=x[1]+" — "+q+" ədəd — "+(x[2]*q).toFixed(2)+" AZN\n";
     });
     m+="\nCəmi: "+t.toFixed(2)+" AZN\nAd: "+n+"\nNömrə: "+cp+"\nÜnvan: "+a;
-    if(note) m+="\nQeyd: "+note;
-
-    location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(m);
-}
-
+if(t < 5){
+        alert("Minimum sifariş məbləği 5 AZN təşkil etməlidir.");
+        return;
+    }
 menu();cart();
 </script>
 </body>
