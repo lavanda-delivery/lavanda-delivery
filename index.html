@@ -54,7 +54,6 @@ header {
     min-width: 0;
 }
 
-/* Filtr və Axtarış Stil Sahəsi */
 .filter-box {
     background: #fff;
     padding: 15px;
@@ -230,7 +229,6 @@ textarea {
     </div>
 
     <div class="main-content">
-        <!-- AXTARIŞ VƏ FİLTR SİSTEMİ -->
         <div class="filter-box">
             <input type="text" id="searchInput" onkeyup="menu()" placeholder="🔍 Yemək və ya içki axtarın...">
             <div id="categoryButtons" class="cat-btns"></div>
@@ -270,222 +268,198 @@ textarea {
 const phone="994558886383";
 let selectedCategory = "Hamısı";
 
-// Qeyd: Yeməyin sonuna 4-cü element kimi xüsusi şəkil linki yaza bilərsiniz
-const p=[
-    // Setlər
-    ["Menyu Setləri","Səhər yeməyi SET (1 nəfərlik)",10.00],
-    ["Menyu Setləri","Evsayağı Süfrə Seti",39.80],
-    ["Menyu Setləri","Piti Seti",25.50],
-    ["Menyu Setləri","Lavanda Miks Set",36.30],
-    ["Menyu Setləri","Fırın Seti",40.00],
-    ["Menyu Setləri","Dad Partlayışı Seti",44.80],
-    ["Menyu Setləri","Xəmir Seti",36.90],
-    ["Menyu Setləri","Kabab Set",39.50],
-    ["Menyu Setləri","XL Ləzzət Seti",99.90],
-    ["Menyu Setləri","Lülə Seti",70.00],
-    ["Menyu Setləri","Burger Set",25.50],
-    ["Menyu Setləri","Fərqli Zövq Seti",29.90],
-    ["Menyu Setləri","Ailəvi Kombo Seti",44.80],
-
-    // Əlavə Səhər Yeməkləri
-    ["Səhər Yeməkləri","Qlazok",2.50],
-    ["Səhər Yeməkləri","Qayğanaq",2.50],
-    ["Səhər Yeməkləri","Pomidor yumurta",3.50],
-    ["Səhər Yeməkləri","Kükü",3.00],
-    ["Səhər Yeməkləri","Sosiska",3.50],
-    ["Səhər Yeməkləri","Sosiska yumurta",4.00],
-    ["Səhər Yeməkləri","Tərəvəzli omlet",3.50],
-
-    // Salatlar
-    ["Salatlar","Pomidor, xiyar",3.50],
-    ["Salatlar","Çoban salatı",4.00],
-    ["Salatlar","Pendir",3.00],
-    ["Salatlar","Süzmə",3.00],
-    ["Salatlar","Qatıq",2.00],
-    ["Salatlar","Turşu assorti",4.50],
-    ["Salatlar","Döyməc",3.00],
-    ["Salatlar","Sparja salatı",5.00],
-    ["Salatlar","Rafaello (4 ədəd)",5.00],
-    ["Salatlar","Xırçılttılı Badımcan salatı",5.00],
-    ["Salatlar","Kök salatı",3.00],
-    ["Salatlar","Paytaxt salatı",4.00],
-    ["Salatlar","Mimoza salatı",4.50],
-    ["Salatlar","Sezar salatı (toyuqlu)",8.00],
-    ["Salatlar","Yunan salatı",5.00],
-    ["Salatlar","Mənqəl salatı",5.00],
-    ["Salatlar","Rəngli bibər salatı",5.00],
-    ["Salatlar","Meyvə (mövsümə görə)",10.00],
-    ["Salatlar","Göyərti",3.00],
-    ["Salatlar","Acika",3.00],
-    ["Salatlar","Zeytun",4.00],
-    ["Salatlar","Valdorf salatı",5.00],
-
-    // Isti Yeməklər & Saclar
-    ["İsti Yeməklər","Lavanda özəl yemək",7.00],
-    ["İsti Yeməklər","Piti",7.00],
-    ["İsti Yeməklər","Səbəliqlı qovurma",8.00],
-    ["İsti Yeməklər","Spaghetti (balonez)",8.00],
-    ["İsti Yeməklər","Toyuq langeti",6.00],
-    ["İsti Yeməklər","Qaymaqlı Toyuq",8.00],
-    ["İsti Yeməklər","Tava",7.00],
-    ["İsti Yeməklər","Nar qovurma",9.00],
-    ["İsti Yeməklər","Toyuq ərüştə",7.00],
-    ["İsti Yeməklər","Dolu dolması",6.00],
-    ["İsti Yeməklər","Julien sadə",5.00],
-    ["İsti Yeməklər","Julien toyuqlu",7.00],
-    ["İsti Yeməklər","Julien mal",8.00],
-    ["İsti Yeməklər","Kiyev kotleti",7.00],
-    ["İsti Yeməklər","Toyuq sote",7.00],
-    ["İsti Yeməklər","Toyuq çığırtma (bütöv)",18.00],
-    ["İsti Yeməklər","Toyuq Şnitzel",7.50],
-    ["İsti Yeməklər","Ət Stroqanov",13.00],
-    ["İsti Yeməklər","Toyuq Stroqanov",9.00],
-    ["İsti Yeməklər","Fettuccine Alfredo",9.00],
-    ["İsti Yeməklər","Monastırsayağı toyuq",9.00],
-    ["Saclar","Sac toyuq",20.00],
-    ["Saclar","Sac Dana",28.00],
-    ["Saclar","Sac quzu",30.00],
-    ["Saclar","Sac qarışıq",36.00],
-
-    // Şorbalar & Qarnirlər & Balıq
-    ["Şorbalar","Girş",3.00],
-    ["Şorbalar","Düşbərə",3.00],
-    ["Şorbalar","Mərcı",3.00],
-    ["Şorbalar","Toyuq şorbası",3.00],
-    ["Şorbalar","Göbələk şorbası",5.00],
-    ["Şorbalar","Pomidor şorbası",3.00],
-    ["Qarnirlər","Düyü",4.00],
-    ["Qarnirlər","Kartof pürə",4.00],
-    ["Qarnirlər","Evsayağı kartof",3.00],
-    ["Balıq Yeməkləri","Belamuq",7.00],
-    ["Balıq Yeməkləri","Sudak",7.00],
-    ["Balıq Yeməkləri","Sazan",7.00],
-    ["Balıq Yeməkləri","Farel",9.00],
-
-    // Kabablar
-    ["Kabablar","Lülə kabab",7.00],
-    ["Kabablar","Tikə kabab",7.00],
-    ["Kabablar","Toyuq kababı",4.50],
-    ["Kabablar","Adana kabab",8.00],
-    ["Kabablar","Kartof lüləsi",3.50],
-    ["Kabablar","İzgara köftə",6.00],
-    ["Kabablar","İzgara Dana əti",10.00],
-    ["Kabablar","Toyuq tabaka",18.00],
-    ["Kabablar","Çolpa Setka",13.00],
-    ["Kabablar","Toyuq lüləsi pendirli",6.00],
-    ["Kabablar","İçalat kababı",6.00],
-    ["Kabablar","Qədim nuxa kababı",14.00],
-    ["Kabablar","Xan kababı",6.00],
-    ["Kabablar","Qozlu lülə kabab",10.00],
-    ["Kabablar","Quyruq kababı",7.00],
-    ["Kabablar","Şiş kababt (uşaqlar üçün)",4.50],
-    ["Kabablar","File kabab",5.00],
-    ["Kabablar","Tərəvəz kabab",1.00],
-    ["Kabablar","Antirikot",8.00],
-    ["Kabablar","Basdırma",8.00],
-    ["Kabablar","Toyuq lüləsi",5.00],
-    ["Kabablar","Semiçka kababı",5.00],
-
-    // Fast Food
-    ["Fast Food","Burger + fri",6.50],
-    ["Fast Food","Chicken burger + fri",6.50],
-    ["Fast Food","Cizburger + fri",7.00],
-    ["Fast Food","Double burger + fri",9.00],
-    ["Fast Food","Pendir Çubuqları + fri",7.00],
-    ["Fast Food","Toyuq Çubuqları + fri",6.00],
-    ["Fast Food","Toyuq Budu + fri",5.00],
-    ["Fast Food","Club Sandwich + fri",8.00],
-    ["Fast Food","KFC qanadları + fri",6.00],
-    ["Fast Food","Acılı toyuq qanadları + fri",6.00],
-    ["Fast Food","Langet toyuq + fri",7.00],
-    ["Fast Food","Şintsel toyuq + fri",7.50],
-    ["Fast Food","Tost sucuklu + fri",5.00],
-    ["Fast Food","Fri",3.00],
-    ["Fast Food","Nuggets + fri",4.50],
-    ["Fast Food","Soğan halqası + fri",5.00],
-
-    // Ət Dönərləri
-    ["Ət Dönərləri","Ət plovüstü dönər (400gr)",8.50],
-    ["Ət Dönərləri","Ət porsion dönər (300gr)",8.50],
-    ["Ət Dönərləri","Ət şaurma (250gr)",4.50],
-    ["Ət Dönərləri","Ət Basdırma dönər (250gr)",4.00],
-    ["Ət Dönərləri","Ət dönər çörəkdə (200gr)",3.50],
-    ["Ət Dönərləri","Ət dönər lavaşda (200gr)",4.00],
-    ["Ət Dönərləri","Ət iskəndər dönər (350gr)",8.00],
-
-    // Toyuq Dönərləri
-    ["Toyuq Dönərləri","Toyuq plovüstü dönər (400gr)",6.50],
-    ["Toyuq Dönərləri","Toyuq porsion dönər (300gr)",6.50],
-    ["Toyuq Dönərləri","Toyuq şaurma (250gr)",3.20],
-    ["Toyuq Dönərləri","Toyuq Basdırma dönər (250gr)",2.80],
-    ["Toyuq Dönərləri","Toyuq dönər çörəkdə (200gr)",2.50],
-    ["Toyuq Dönərləri","Toyuq dönər lavaşda (200gr)",3.00],
-    ["Toyuq Dönərləri","Toyuq iskəndər dönər (350gr)",6.00],
-
-    // Xəmir Yeməkləri
-    ["Xəmir Yeməkləri","Ət Qutabı",1.50],
-    ["Xəmir Yeməkləri","Göy Qutabı",0.80],
-    ["Xəmir Yeməkləri","Gürcü Xəngəli 1 ədəd",1.00],
-    ["Xəmir Yeməkləri","Girs",3.00],
-    ["Xəmir Yeməkləri","Yarpaq Xəngəli",5.00],
-
-    // İçkilər & Şirniyyatlar & Kofe
-    ["Sərin İçkilər","Fanta, Coca cola, Sprite, Pepsi Stəkan",0.80],
-    ["Sərin İçkilər","Fanta, Coca cola, Sprite, Pepsi 0.33L",1.20],
-    ["Sərin İçkilər","Fanta, Coca cola, Sprite, Pepsi 0.5L",1.80],
-    ["Sərin İçkilər","Fanta, Coca cola, Sprite, Pepsi 1L",3.00],
-    ["Sərin İçkilər","Düşeş / Tərxun 0.5L",3.00],
-    ["Sərin İçkilər","Düşeş / Tərxun Stəkan",0.80],
-    ["Sərin İçkilər","Soyuq çay banka",2.00],
-    ["Sərin İçkilər","Cappy 0.5L",2.00],
-    ["Sərin İçkilər","Cappy 1L",3.00],
-    ["Sərin İçkilər","Çöplü meyvə şirəsi",1.00],
-    ["Sərin İçkilər","Kompot",3.50],
-    ["Sərin İçkilər","Ayran",0.80],
-    ["Kokteyllər","Ice Coffee",3.50],
-    ["Kokteyllər","Milkshakes Çiyələk",4.50],
-    ["Kokteyllər","Milkshakes Banan",4.50],
-    ["Kokteyllər","Milkshakes Vanilla",4.00],
-    ["Kokteyllər","Milkshakes Bounty",5.00],
-    ["Kokteyllər","Milkshakes Snickers",5.00],
-    ["Kokteyllər","Milkshakes Oreo",5.00],
-    ["Kokteyllər","Milkshakes Caramel",5.00],
-    ["Kokteyllər","Milkshakes Şokolad",5.00],
-    ["Kokteyllər","Moxito",4.00],
-    ["Çay & Desertlər","Çay stəkan",0.50],
-    ["Çay & Desertlər","Çay çaynik",2.00],
-    ["Çay & Desertlər","Çay şokolad",5.00],
-    ["Çay & Desertlər","Çay mürəbbə",5.00],
-    ["Çay & Desertlər","Çay Şəki halvası",5.00],
-    ["Çay & Desertlər","Çay dəstgahı",6.00],
-    ["Çay & Desertlər","Şəki halvası",5.00],
-    ["Çay & Desertlər","Bamiyə",3.00],
-    ["Çay & Desertlər","Mindal",5.00],
-    ["Çay & Desertlər","Dondurma (3 top)",3.00],
-    ["Çay & Desertlər","Qoz mürəbbəsi",5.00],
-    ["Çay & Desertlər","Mürəbbə kiçik/böyük",3.00],
-    ["Çay & Desertlər","Paxlava",1.00],
-    ["Çay & Desertlər","Türk paxlavası",0.80],
-    ["Kofelər","Kofe sadə",2.00],
-    ["Kofelər","Südlü kofe",3.00],
-    ["Kofelər","Cappucino",2.50],
-    ["Kofelər","Latte",2.50],
-    ["Kofelər","İsti şokolad",2.50]
+const p = [
+    ["Menyu Setləri", "Səhər yeməyi SET (1 nəfərlik)", 10.00],
+    ["Menyu Setləri", "Evsayağı Süfrə Seti", 39.80],
+    ["Menyu Setləri", "Piti Seti", 25.50],
+    ["Menyu Setləri", "Lavanda Miks Set", 36.30],
+    ["Menyu Setləri", "Fırın Seti", 40.00],
+    ["Menyu Setləri", "Dad Partlayışı Seti", 44.80],
+    ["Menyu Setləri", "Xəmir Seti", 36.90],
+    ["Menyu Setləri", "Kabab Set", 39.50],
+    ["Menyu Setləri", "XL Ləzzət Seti", 99.90],
+    ["Menyu Setləri", "Lülə Seti", 70.00],
+    ["Menyu Setləri", "Burger Set", 25.50],
+    ["Menyu Setləri", "Fərqli Zövq Seti", 29.90],
+    ["Menyu Setləri", "Ailəvi Kombo Seti", 44.80],
+    ["Səhər Yeməkləri", "Qlazok", 2.50],
+    ["Səhər Yeməkləri", "Qayğanaq", 2.50],
+    ["Səhər Yeməkləri", "Pomidor yumurta", 3.50],
+    ["Səhər Yeməkləri", "Kükü", 3.00],
+    ["Səhər Yeməkləri", "Sosiska", 3.50],
+    ["Səhər Yeməkləri", "Sosiska yumurta", 4.00],
+    ["Səhər Yeməkləri", "Tərəvəzli omlet", 3.50],
+    ["Salatlar", "Pomidor, xiyar", 3.50],
+    ["Salatlar", "Çoban salatı", 4.00],
+    ["Salatlar", "Pendir", 3.00],
+    ["Salatlar", "Süzmə", 3.00],
+    ["Salatlar", "Qatıq", 2.00],
+    ["Salatlar", "Turşu assorti", 4.50],
+    ["Salatlar", "Döyməc", 3.00],
+    ["Salatlar", "Sparja salatı", 5.00],
+    ["Salatlar", "Rafaello (4 ədəd)", 5.00],
+    ["Salatlar", "Xırçılttılı Badımcan salatı", 5.00],
+    ["Salatlar", "Kök salatı", 3.00],
+    ["Salatlar", "Paytaxt salatı", 4.00],
+    ["Salatlar", "Mimoza salatı", 4.50],
+    ["Salatlar", "Sezar salatı (toyuqlu)", 8.00],
+    ["Salatlar", "Yunan salatı", 5.00],
+    ["Salatlar", "Mənqəl salatı", 5.00],
+    ["Salatlar", "Rəngli bibər salatı", 5.00],
+    ["Salatlar", "Meyvə (mövsümə görə)", 10.00],
+    ["Salatlar", "Göyərti", 3.00],
+    ["Salatlar", "Acika", 3.00],
+    ["Salatlar", "Zeytun", 4.00],
+    ["Salatlar", "Valdorf salatı", 5.00],
+    ["İsti Yeməklər", "Lavanda özəl yemək", 7.00],
+    ["İsti Yeməklər", "Piti", 7.00],
+    ["İsti Yeməklər", "Səbəliqlı qovurma", 8.00],
+    ["İsti Yeməklər", "Spaghetti (balonez)", 8.00],
+    ["İsti Yeməklər", "Toyuq langeti", 6.00],
+    ["İsti Yeməklər", "Qaymaqlı Toyuq", 8.00],
+    ["İsti Yeməklər", "Tava", 7.00],
+    ["İsti Yeməklər", "Nar qovurma", 9.00],
+    ["İsti Yeməklər", "Toyuq ərüştə", 7.00],
+    ["İsti Yeməklər", "Dolu dolması", 6.00],
+    ["İsti Yeməklər", "Julien sadə", 5.00],
+    ["İsti Yeməklər", "Julien toyuqlu", 7.00],
+    ["İsti Yeməklər", "Julien mal", 8.00],
+    ["İsti Yeməklər", "Kiyev kotleti", 7.00],
+    ["İsti Yeməklər", "Toyuq sote", 7.00],
+    ["İsti Yeməklər", "Toyuq çığırtma (bütöv)", 18.00],
+    ["İsti Yeməklər", "Toyuq Şnitzel", 7.50],
+    ["İsti Yeməklər", "Ət Stroqanov", 13.00],
+    ["İsti Yeməklər", "Toyuq Stroqanov", 9.00],
+    ["İsti Yeməklər", "Fettuccine Alfredo", 9.00],
+    ["İsti Yeməklər", "Monastırsayağı toyuq", 9.00],
+    ["Saclar", "Sac toyuq", 20.00],
+    ["Saclar", "Sac Dana", 28.00],
+    ["Saclar", "Sac quzu", 30.00],
+    ["Saclar", "Sac qarışıq", 36.00],
+    ["Şorbalar", "Girş", 3.00],
+    ["Şorbalar", "Düşbərə", 3.00],
+    ["Şorbalar", "Mərcı", 3.00],
+    ["Şorbalar", "Toyuq şorbası", 3.00],
+    ["Şorbalar", "Göbələk şorbası", 5.00],
+    ["Şorbalar", "Pomidor şorbası", 3.00],
+    ["Qarnirlər", "Düyü", 4.00],
+    ["Qarnirlər", "Kartof pürə", 4.00],
+    ["Qarnirlər", "Evsayağı kartof", 3.00],
+    ["Balıq Yeməkləri", "Belamuq", 7.00],
+    ["Balıq Yeməkləri", "Sudak", 7.00],
+    ["Balıq Yeməkləri", "Sazan", 7.00],
+    ["Balıq Yeməkləri", "Farel", 9.00],
+    ["Kabablar", "Lülə kabab", 7.00],
+    ["Kabablar", "Tikə kabab", 7.00],
+    ["Kabablar", "Toyuq kababı", 4.50],
+    ["Kabablar", "Adana kabab", 8.00],
+    ["Kabablar", "Kartof lüləsi", 3.50],
+    ["Kabablar", "İzgara köftə", 6.00],
+    ["Kabablar", "İzgara Dana əti", 10.00],
+    ["Kabablar", "Toyuq tabaka", 18.00],
+    ["Kabablar", "Çolpa Setka", 13.00],
+    ["Kabablar", "Toyuq lüləsi pendirli", 6.00],
+    ["Kabablar", "İçalat kababı", 6.00],
+    ["Kabablar", "Qədim nuxa kababı", 14.00],
+    ["Kabablar", "Xan kababı", 6.00],
+    ["Kabablar", "Qozlu lülə kabab", 10.00],
+    ["Kabablar", "Quyruq kababı", 7.00],
+    ["Kabablar", "Şiş kababt (uşaqlar üçün)", 4.50],
+    ["Kabablar", "File kabab", 5.00],
+    ["Kabablar", "Tərəvəz kabab", 1.00],
+    ["Kabablar", "Antirikot", 8.00],
+    ["Kabablar", "Basdırma", 8.00],
+    ["Kabablar", "Toyuq lüləsi", 5.00],
+    ["Kabablar", "Semiçka kababı", 5.00],
+    ["Fast Food", "Burger + fri", 6.50],
+    ["Fast Food", "Chicken burger + fri", 6.50],
+    ["Fast Food", "Cizburger + fri", 7.00],
+    ["Fast Food", "Double burger + fri", 9.00],
+    ["Fast Food", "Pendir Çubuqları + fri", 7.00],
+    ["Fast Food", "Toyuq Çubuqları + fri", 6.00],
+    ["Fast Food", "Toyuq Budu + fri", 5.00],
+    ["Fast Food", "Club Sandwich + fri", 8.00],
+    ["Fast Food", "KFC qanadları + fri", 6.00],
+    ["Fast Food", "Acılı toyuq qanadları + fri", 6.00],
+    ["Fast Food", "Langet toyuq + fri", 7.00],
+    ["Fast Food", "Şintsel toyuq + fri", 7.50],
+    ["Fast Food", "Tost sucuklu + fri", 5.00],
+    ["Fast Food", "Fri", 3.00],
+    ["Fast Food", "Nuggets + fri", 4.50],
+    ["Fast Food", "Soğan halqası + fri", 5.00],
+    ["Ət Dönərləri", "Ət plovüstü dönər (400gr)", 8.50],
+    ["Ət Dönərləri", "Ət porsion dönər (300gr)", 8.50],
+    ["Ət Dönərləri", "Ət şaurma (250gr)", 4.50],
+    ["Ət Dönərləri", "Ət Basdırma dönər (250gr)", 4.00],
+    ["Ət Dönərləri", "Ət dönər çörəkdə (200gr)", 3.50],
+    ["Ət Dönərləri", "Ət dönər lavaşda (200gr)", 4.00],
+    ["Ət Dönərləri", "Ət iskəndər dönər (350gr)", 8.00],
+    ["Toyuq Dönərləri", "Toyuq plovüstü dönər (400gr)", 6.50],
+    ["Toyuq Dönərləri", "Toyuq porsion dönər (300gr)", 6.50],
+    ["Toyuq Dönərləri", "Toyuq şaurma (250gr)", 3.20],
+    ["Toyuq Dönərləri", "Toyuq Basdırma dönər (250gr)", 2.80],
+    ["Toyuq Dönərləri", "Toyuq dönər çörəkdə (200gr)", 2.50],
+    ["Toyuq Dönərləri", "Toyuq dönər lavaşda (200gr)", 3.00],
+    ["Toyuq Dönərləri", "Toyuq iskəndər dönər (350gr)", 6.00],
+    ["Xəmir Yeməkləri", "Ət Qutabı", 1.50],
+    ["Xəmir Yeməkləri", "Göy Qutabı", 0.80],
+    ["Xəmir Yeməkləri", "Gürcü Xəngəli 1 ədəd", 1.00],
+    ["Xəmir Yeməkləri", "Girs", 3.00],
+    ["Xəmir Yeməkləri", "Yarpaq Xəngəli", 5.00],
+    ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi Stəkan", 0.80],
+    ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi 0.33L", 1.20],
+    ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi 0.5L", 1.80],
+    ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi 1L", 3.00],
+    ["Sərin İçkilər", "Düşeş / Tərxun 0.5L", 3.00],
+    ["Sərin İçkilər", "Düşeş / Tərxun Stəkan", 0.80],
+    ["Sərin İçkilər", "Soyuq çay banka", 2.00],
+    ["Sərin İçkilər", "Cappy 0.5L", 2.00],
+    ["Sərin İçkilər", "Cappy 1L", 3.00],
+    ["Sərin İçkilər", "Çöplü meyvə şirəsi", 1.00],
+    ["Sərin İçkilər", "Kompot", 3.50],
+    ["Sərin İçkilər", "Ayran", 0.80],
+    ["Kokteyllər", "Ice Coffee", 3.50],
+    ["Kokteyllər", "Milkshakes Çiyələk", 4.50],
+    ["Kokteyllər", "Milkshakes Banan", 4.50],
+    ["Kokteyllər", "Milkshakes Vanilla", 4.00],
+    ["Kokteyllər", "Milkshakes Bounty", 5.00],
+    ["Kokteyllər", "Milkshakes Snickers", 5.00],
+    ["Kokteyllər", "Milkshakes Oreo", 5.00],
+    ["Kokteyllər", "Milkshakes Caramel", 5.00],
+    ["Kokteyllər", "Milkshakes Şokolad", 5.00],
+    ["Kokteyllər", "Moxito", 4.00],
+    ["Çay & Desertlər", "Çay stəkan", 0.50],
+    ["Çay & Desertlər", "Çay çaynik", 2.00],
+    ["Çay & Desertlər", "Çay şokolad", 5.00],
+    ["Çay & Desertlər", "Çay mürəbbə", 5.00],
+    ["Çay & Desertlər", "Çay Şəki halvası", 5.00],
+    ["Çay & Desertlər", "Çay dəstgahı", 6.00],
+    ["Çay & Desertlər", "Şəki halvası", 5.00],
+    ["Çay & Desertlər", "Bamiyə", 3.00],
+    ["Çay & Desertlər", "Mindal", 5.00],
+    ["Çay & Desertlər", "Dondurma (3 top)", 3.00],
+    ["Çay & Desertlər", "Qoz mürəbbəsi", 5.00],
+    ["Çay & Desertlər", "Mürəbbə kiçik/böyük", 3.00],
+    ["Çay & Desertlər", "Paxlava", 1.00],
+    ["Çay & Desertlər", "Türk paxlavası", 0.80],
+    ["Kofelər", "Kofe sadə", 2.00],
+    ["Kofelər", "Südlü kofe", 3.00],
+    ["Kofelər", "Cappucino", 2.50],
+    ["Kofelər", "Latte", 2.50],
+    ["Kofelər", "İsti şokolad", 2.50]
 ];
 
-let c={};
+let c = {};
 
-// İş saatı yoxlanışı (10:00 - 23:00)
 function isRestaurantOpen() {
     const hour = new Date().getHours();
     return hour >= 10 && hour < 23;
 }
 
-// Kateqoriya düymələrinin renderi
 function renderCategories() {
-    let cats = ["Hamısı", ...new Set(p.map(x=>x[0]))];
+    let cats = ["Hamısı", ...new Set(p.map(x => x[0]))];
     document.querySelector("#categoryButtons").innerHTML = cats.map(cat => 
-        <button class="cat-btn ${selectedCategory === cat ? 'active' : ''}" onclick="selectCategory('${cat}')">${cat}</button>
+        <button class="cat-btn ${selectedCategory === cat ? 'active' : ''}" onclick="selectCategory('${cat.replace(/'/g, "\\'")}')">${cat}</button>
     ).join("");
 }
 
@@ -496,22 +470,23 @@ function selectCategory(cat) {
 }
 
 function menu(){
-    let search = document.querySelector("#searchInput").value.toLowerCase();
-    let cats = [...new Set(p.map(x=>x[0]))];
+    let searchInput = document.querySelector("#searchInput");
+    let search = searchInput ? searchInput.value.toLowerCase() : "";
+    let cats = [...new Set(p.map(x => x[0]))];
     let html = "";
 
     cats.forEach(cat => {
         if (selectedCategory !== "Hamısı" && selectedCategory !== cat) return;
 
-        let itemsHtml = p.map((x,i)=>{
+        let itemsHtml = p.map((x, i) => {
             if(x[0] !== cat) return '';
             if(search && !x[1].toLowerCase().includes(search)) return '';
 
             let qty = c[i] || 0;
-            let imgUrl = x[3] || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100'; // Standart şəkil
+            let imgUrl = x[3] || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100';
             let btnHtml = qty > 0 
-                ? '<div class="counter"><button onclick="minus('+i+')">−</button><span>'+qty+'</span><button onclick="add('+i+')">+</button></div>'
-                : '<button class="add-btn" onclick="add('+i+')">+ Əlavə et</button>';
+                ? <div class="counter"><button onclick="minus(${i})">−</button><span>${qty}</span><button onclick="add(${i})">+</button></div>
+                : <button class="add-btn" onclick="add(${i})">+ Əlavə et</button>;
             
             return `
                 <div class="item">
@@ -527,7 +502,7 @@ function menu(){
         }).join("");
 
         if (itemsHtml.trim() !== "") {
-            html += '<div class="cat">'+cat+'</div>' + itemsHtml;
+            html += <div class="cat">${cat}</div> + itemsHtml;
         }
     });
 
@@ -535,13 +510,13 @@ function menu(){
 }
 
 function add(i){
-    c[i]=(c[i]||0)+1;
+    c[i] = (c[i] || 0) + 1;
     menu();
     cart();
 }
 
 function minus(i){
-    if(c[i]>1){
+    if(c[i] > 1){
         c[i]--;
     } else {
         delete c[i];
@@ -551,17 +526,17 @@ function minus(i){
 }
 
 function cart(){
-    let s="", t=0;
-    Object.keys(c).forEach(i=>{
-        let x=p[i], q=c[i], v=x[2]*q;
-        t+=v;
-        s+=x[1]+" — "+q+" ədəd — "+v.toFixed(2)+" AZN <button class='minus-btn' onclick='minus("+i+")'>−</button><br>";
+    let s = "", t = 0;
+    Object.keys(c).forEach(i => {
+        let x = p[i], q = c[i], v = x[2] * q;
+        t += v;
+        s += ${x[1]} — ${q} ədəd — ${v.toFixed(2)} AZN <button class="minus-btn" onclick="minus(${i})">−</button><br>;
     });
 
     let deliveryFee = parseFloat(document.querySelector("#deliveryZone").value) || 0;
     let grandTotal = t + (t > 0 ? deliveryFee : 0);
 
-    document.querySelector("#cart").innerHTML=s||"Səbət boşdur.";
+    document.querySelector("#cart").innerHTML = s || "Səbət boşdur.";
     
     let totalText = "Cəmi: " + grandTotal.toFixed(2) + " AZN";
     if (t > 0 && deliveryFee > 0) {
@@ -575,20 +550,20 @@ function send(){
         return alert("Hal-hazırda restoranımız bağlıdır! İş saatları: 10:00 - 23:00");
     }
 
-    let n=document.querySelector("#name").value.trim(),
-        cp=document.querySelector("#customer_phone").value.trim(),
-        a=document.querySelector("#address").value.trim(),
-        note=document.querySelector("#note").value.trim(),
-        keys=Object.keys(c);
+    let n = document.querySelector("#name").value.trim(),
+        cp = document.querySelector("#customer_phone").value.trim(),
+        a = document.querySelector("#address").value.trim(),
+        note = document.querySelector("#note").value.trim(),
+        keys = Object.keys(c);
 
     if(!keys.length) return alert("Əvvəlcə məhsul seçin.");
-    if(!n||!cp||!a) return alert("Zəhmət olmasa Adınızı, Əlaqə nömrənizi və Ünvanı daxil edin.");
+    if(!n || !cp || !a) return alert("Zəhmət olmasa Adınızı, Əlaqə nömrənizi və Ünvanı daxil edin.");
 
-    let t=0, m="Salam, Lavanda Restorandan sifariş vermək istəyirəm.\n\n";
-    keys.forEach(i=>{
-        let x=p[i], q=c[i];
-        t+=x[2]*q;
-        m+=x[1]+" — "+q+" ədəd — "+(x[2]*q).toFixed(2)+" AZN\n";
+    let t = 0, m = "Salam, Lavanda Restorandan sifariş vermək istəyirəm.\n\n";
+    keys.forEach(i => {
+        let x = p[i], q = c[i];
+        t += x[2] * q;
+        m += ${x[1]} — ${q} ədəd — ${(x[2] * q).toFixed(2)} AZN\n;
     });
 
     if(t < 5) {
@@ -602,10 +577,10 @@ function send(){
         m += "\nÇatdırılma haqqı: " + deliveryFee.toFixed(2) + " AZN";
     }
 
-    m+="\nYekun Məbləğ: "+grandTotal.toFixed(2)+" AZN\nAd: "+n+"\nNömrə: "+cp+"\nÜnvan: "+a;
-    if(note) m+="\nQeyd: "+note;
+    m += "\nYekun Məbləğ: " + grandTotal.toFixed(2) + " AZN\nAd: " + n + "\nNömrə: " + cp + "\nÜnvan: " + a;
+    if(note) m += "\nQeyd: " + note;
 
-    location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(m);
+    location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(m);
 }
 
 renderCategories();
