@@ -1,299 +1,270 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lavanda Restoran - Menyu</title>
+<style>
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; background: #f6f2ed; color: #222; }
+header { background: #6b3fa0; color: #fff; text-align: center; padding: 20px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
 
-  <title>Lavanda Restoran Şəki — Menyu</title>
+.layout-container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: flex; gap: 20px; }
+.side-banner { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; }
+.side-banner img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
+.main-content { flex: 1; }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+.filter-box { background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+.cat-btns { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; margin-top: 10px; }
+.cat-btn { padding: 8px 14px; border-radius: 20px; border: 1px solid #6b3fa0; background: #fff; color: #6b3fa0; cursor: pointer; white-space: nowrap; font-weight: bold; }
+.cat-btn.active { background: #6b3fa0; color: #fff; }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
+.cat { font-size: 20px; font-weight: bold; margin: 25px 0 10px; color: #6b3fa0; border-bottom: 2px solid #6b3fa0; padding-bottom: 5px; }
+.item, .cart { background: #fff; border-radius: 12px; padding: 14px; margin: 8px 0; box-shadow: 0 2px 7px rgba(0,0,0,0.08); }
+.item { display: flex; justify-content: space-between; align-items: center; }
+.item-info { display: flex; align-items: center; gap: 12px; }
+.item-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+.item button.add-btn { background: #6b3fa0; color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; font-weight: bold; }
 
-    header {
-      background: white;
-      padding: 25px 15px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+.counter { display: flex; align-items: center; background: #f0e8f8; border-radius: 8px; padding: 3px; border: 1px solid #6b3fa0; }
+.counter button { background: #6b3fa0; color: #fff; border: 0; border-radius: 6px; width: 28px; height: 28px; font-weight: bold; cursor: pointer; }
+.counter span { padding: 0 10px; font-weight: bold; color: #6b3fa0; }
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
+.cart { margin-top: 30px; border: 2px solid #6b3fa0; }
+input, textarea, select { width: 100%; padding: 12px; margin: 6px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; }
+.order { width: 100%; background: #25D366; color: #fff; border: 0; padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+.minus-btn { background: #e74c3c; color: #fff; border: 0; border-radius: 5px; padding: 2px 8px; margin-left: 8px; cursor: pointer; }
 
-    header p {
-      margin: 7px 0 0;
-      color: #777;
-    }
-
-    .menu {
-      max-width: 1100px;
-      margin: 25px auto;
-      padding: 0 15px;
-
-      display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(230px, 1fr)
-      );
-
-      gap: 18px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-      transition: 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
-
-    .card img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      display: block;
-      background: #eee;
-    }
-
-    .info {
-      padding: 15px;
-    }
-
-    .info h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      line-height: 1.3;
-    }
-
-    .price {
-      font-size: 19px;
-      font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-      .menu {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 0 10px;
-      }
-
-      .card img {
-        height: 140px;
-      }
-
-      .info {
-        padding: 10px;
-      }
-
-      .info h2 {
-        font-size: 15px;
-      }
-
-      .price {
-        font-size: 16px;
-      }
-
-      header h1 {
-        font-size: 22px;
-      }
-    }
-  </style>
+@media (max-width: 800px) {
+    .layout-container { flex-direction: column; }
+    .side-banner { display: none; }
+}
+</style>
 </head>
-
 <body>
 
 <header>
-  <h1>Lavanda Restoran Şəki</h1>
-  <p>Menyu</p>
+    <h1 style="margin:0;">Lavanda Restoran</h1>
+    <div style="margin-top:5px;">Şəki • Şəhərdaxili çatdırılma pulsuzdur</div>
 </header>
 
-<main class="menu">
-
-  <!-- 1 -->
-  <div class="card">
-    <img src="images/toyuq-cubuqlari.jpg"
-         alt="Toyuq Çubuqları (5 əd) + Kartof Fri">
-
-    <div class="info">
-      <h2>Toyuq Çubuqları (5 əd) + Kartof Fri</h2>
-      <div class="price">7.00 AZN</div>
+<div class="layout-container">
+    <div class="side-banner">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500" alt="Restoran">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Kabablar">
     </div>
-  </div>
 
-  <!-- 2 -->
-  <div class="card">
-    <img src="images/toyuq-budu.jpg"
-         alt="Toyuq Budu (2 əd) + Kartof Fri">
+    <div class="main-content">
+        <div class="filter-box">
+            <input type="text" id="searchInput" onkeyup="renderMenu()" placeholder="Axtarış elə...">
+            <div id="categoryButtons" class="cat-btns"></div>
+        </div>
 
-    <div class="info">
-      <h2>Toyuq Budu (2 əd) + Kartof Fri</h2>
-      <div class="price">7.50 AZN</div>
+        <div id="menuContainer"></div>
+
+        <div class="cart">
+            <h2 style="margin-top:0;color:#6b3fa0;">🛒 Sifarişiniz</h2>
+            <div id="cart">Səbət boşdur.</div>
+            
+            <label style="display:block; margin-top:12px; font-weight:bold;">Çatdırılma zonası:</label>
+            <select id="deliveryZone" onchange="renderCart()">
+                <option value="0">Şəhərdaxili (Pulsuz)</option>
+                <option value="2">Şəhərdən kənar (+2.00 AZN)</option>
+            </select>
+
+            <h3 id="total">Cəmi: 0.00 AZN</h3>
+            
+            <input id="name" placeholder="Adınız və Soyadınız">
+            <input id="customer_phone" type="tel" placeholder="Əlaqə nömrəniz">
+            <input id="address" placeholder="Çatdırılma ünvanı">
+            <textarea id="note" placeholder="Müştəri qeydi"></textarea>
+            
+            <button class="order" onclick="sendOrder()">📲 WhatsApp-da sifariş et</button>
+        </div>
     </div>
-  </div>
 
-  <!-- 3 -->
-  <div class="card">
-    <img src="images/klab-sendvic.jpg"
-         alt="Klab Sendviç + Kartof Fri">
-
-    <div class="info">
-      <h2>Klab Sendviç + Kartof Fri</h2>
-      <div class="price">9.50 AZN</div>
+    <div class="side-banner">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500" alt="Restoran">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Burger">
     </div>
-  </div>
+</div>
 
-  <!-- 4 -->
-  <div class="card">
-    <img src="images/kfc-qanadlari.jpg"
-         alt="KFC Qanadları (3 əd) + Kartof Fri">
+<script>
+var phone = "994558886383";
+var selectedCategory = "Hamısı";
 
-    <div class="info">
-      <h2>KFC Qanadları (3 əd) + Kartof Fri</h2>
-      <div class="price">7.50 AZN</div>
-    </div>
-  </div>
+/* Hər məhsulun sonuna yüklədiyiniz şəkil adını yaza bilərsiniz (məsələn: 'lavasda at _resized.png') */
+var p = [
+    ["Fast Food", "Toyuq Çubuqları + fri", 6.00, "lavasda at _resized.png"],
+    ["Fast Food", "Toyuq Budu + fri", 5.00, ""],
+    ["Fast Food", "Club Sandwich + fri", 8.00, ""],
+    ["Fast Food", "KFC qanadları + fri", 6.00, ""],
+    ["Fast Food", "Acılı toyuq qanadları + fri", 6.00, ""],
+    ["Fast Food", "Langet toyuq + fri", 7.00, ""],
+    ["Fast Food", "Şintsel toyuq + fri", 7.50, ""],
+    ["Fast Food", "Tost sucuklu + fri", 5.00, ""],
+    // Digər məhsullar...
+    ["Menyu Setləri", "Səhər yeməyi SET (1 nəfərlik)", 10.00, ""],
+    ["Menyu Setləri", "Evsayağı Süfrə Seti", 39.80, ""]
+];
 
-  <!-- 5 -->
-  <div class="card">
-    <img src="images/acili-qanad.jpg"
-         alt="Acılı Toyuq Qanadları (3 əd) + Kartof Fri">
+var c = {};
 
-    <div class="info">
-      <h2>Acılı Toyuq Qanadları (3 əd) + Kartof Fri</h2>
-      <div class="price">7.50 AZN</div>
-    </div>
-  </div>
+function renderCategories() {
+    var cats = ["Hamısı"];
+    for(var i=0; i<p.length; i++) {
+        if(cats.indexOf(p[i][0]) === -1) {
+            cats.push(p[i][0]);
+        }
+    }
+    
+    var btnContainer = document.getElementById("categoryButtons");
+    if(btnContainer) {
+        var html = "";
+        for(var j=0; j<cats.length; j++) {
+            var cat = cats[j];
+            var activeClass = (selectedCategory === cat) ? "active" : "";
+            html += '<button class="cat-btn ' + activeClass + '" onclick="selectCategory(\'' + cat + '\')">' + cat + '</button>';
+        }
+        btnContainer.innerHTML = html;
+    }
+}
 
-  <!-- 6 -->
-  <div class="card">
-    <img src="images/toyuq-langeti.jpg"
-         alt="Toyuq Langeti + Kartof Fri">
+function selectCategory(cat) {
+    selectedCategory = cat;
+    renderCategories();
+    renderMenu();
+}
 
-    <div class="info">
-      <h2>Toyuq Langeti + Kartof Fri</h2>
-      <div class="price">9.50 AZN</div>
-    </div>
-  </div>
+function renderMenu() {
+    var searchInput = document.getElementById("searchInput");
+    var search = searchInput ? searchInput.value.toLowerCase() : "";
+    var cats = [];
+    
+    for(var i=0; i<p.length; i++) {
+        if(cats.indexOf(p[i][0]) === -1) {
+            cats.push(p[i][0]);
+        }
+    }
 
-  <!-- 7 -->
-  <div class="card">
-    <img src="images/toyuq-snitsel.jpg"
-         alt="Toyuq Şnitsel + Kartof Fri">
+    var html = "";
 
-    <div class="info">
-      <h2>Toyuq Şnitsel + Kartof Fri</h2>
-      <div class="price">9.00 AZN</div>
-    </div>
-  </div>
+    for(var k=0; k<cats.length; k++) {
+        var cat = cats[k];
+        if (selectedCategory !== "Hamısı" && selectedCategory !== cat) continue;
 
-  <!-- 8 -->
-  <div class="card">
-    <img src="images/sucuqlu-tost.jpg"
-         alt="Sucuqlu Tost + Kartof Fri">
+        var itemsHtml = "";
 
-    <div class="info">
-      <h2>Sucuqlu Tost + Kartof Fri</h2>
-      <div class="price">6.50 AZN</div>
-    </div>
-  </div>
+        for(var m=0; m<p.length; m++) {
+            if(p[m][0] !== cat) continue;
+            if(search && p[m][1].toLowerCase().indexOf(search) === -1) continue;
 
-  <!-- 9 -->
-  <div class="card">
-    <img src="images/kartof-fri.jpg"
-         alt="Kartof Fri">
+            var qty = c[m] || 0;
+            // Əgər şəkil əlavə olunubsa onu götürür, yoxdursa standart şəkil qoyur
+            var imgUrl = (p[m][3] && p[m][3] !== "") ? p[m][3] : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100';
+            var btnHtml = "";
 
-    <div class="info">
-      <h2>Kartof Fri</h2>
-      <div class="price">4.00 AZN</div>
-    </div>
-  </div>
+            if(qty > 0) {
+                btnHtml = '<div class="counter"><button onclick="minus(' + m + ')">−</button><span>' + qty + '</span><button onclick="add(' + m + ')">+</button></div>';
+            } else {
+                btnHtml = '<button class="add-btn" onclick="add(' + m + ')">+ Əlavə et</button>';
+            }
 
-  <!-- 10 -->
-  <div class="card">
-    <img src="images/naqqets.jpg"
-         alt="Naqqets (5 əd) + Kartof Fri">
+            itemsHtml += '<div class="item">' +
+                '<div class="item-info">' +
+                    '<img src="' + imgUrl + '" class="item-img">' +
+                    '<div><b>' + p[m][1] + '</b><br><span>' + p[m][2].toFixed(2) + ' AZN</span></div>' +
+                '</div>' +
+                btnHtml +
+            '</div>';
+        }
 
-    <div class="info">
-      <h2>Naqqets (5 əd) + Kartof Fri</h2>
-      <div class="price">6.00 AZN</div>
-    </div>
-  </div>
+        if (itemsHtml !== "") {
+            html += '<div class="cat">' + cat + '</div>' + itemsHtml;
+        }
+    }
 
-  <!-- 11 -->
-  <div class="card">
-    <img src="images/saurma.jpg"
-         alt="Toyuqlu Şaurma Lavaşda">
+    var menuDiv = document.getElementById("menuContainer");
+    if(menuDiv) {
+        menuDiv.innerHTML = html || '<div style="padding:15px; text-align:center;">Məhsul tapılmadı.</div>';
+    }
+}
 
-    <div class="info">
-      <h2>Toyuqlu Şaurma Lavaşda</h2>
-      <p>
-        Toyuq əti, kartof, turşu xiyar, şaurma sousu
-      </p>
-      <div class="price">4.00 AZN</div>
-    </div>
-  </div>
+function add(i) {
+    c[i] = (c[i] || 0) + 1;
+    renderMenu();
+    renderCart();
+}
 
-  <!-- 12 -->
-  <div class="card">
-    <img src="images/iskender.jpg"
-         alt="Toyuqlu İskəndər Dönəri">
+function minus(i) {
+    if(c[i] > 1) {
+        c[i]--;
+    } else {
+        delete c[i];
+    }
+    renderMenu();
+    renderCart();
+}
 
-    <div class="info">
-      <h2>Toyuqlu İskəndər Dönəri</h2>
-      <p>
-        Toyuq, qatıq, pomidor, bibər
-      </p>
-      <div class="price">6.50 AZN</div>
-    </div>
-  </div>
+function renderCart() {
+    var s = "", t = 0;
+    var keys = Object.keys(c);
+    
+    for(var i=0; i<keys.length; i++) {
+        var index = keys[i];
+        var x = p[index], q = c[index], v = x[2] * q;
+        t += v;
+        s += x[1] + ' — ' + q + ' ədəd — ' + v.toFixed(2) + ' AZN <button class="minus-btn" onclick="minus(' + index + ')">−</button><br>';
+    }
 
-  <!-- 13 -->
-  <div class="card">
-    <img src="images/doner-corek.jpg"
-         alt="Toyuq Dönəri Çörəkdə">
+    var deliveryZone = document.getElementById("deliveryZone");
+    var deliveryFee = deliveryZone ? parseFloat(deliveryZone.value) || 0 : 0;
+    var grandTotal = t + (t > 0 ? deliveryFee : 0);
 
-    <div class="info">
-      <h2>Toyuq Dönəri Çörəkdə</h2>
-      <p>
-        Toyuq əti, pomidor, xiyar, mayonez
-      </p>
-      <div class="price">3.00 AZN</div>
-    </div>
-  </div>
+    var cartDiv = document.getElementById("cart");
+    if(cartDiv) cartDiv.innerHTML = s || "Səbət boşdur.";
+    
+    var totalText = "Cəmi: " + grandTotal.toFixed(2) + " AZN";
+    var totalEl = document.getElementById("total");
+    if(totalEl) totalEl.innerText = totalText;
+}
 
-  <!-- 14 -->
-  <div class="card">
-    <img src="images/doner-lavas.jpg"
-         alt="Toyuq Dönəri Lavaşda">
+function sendOrder() {
+    var n = document.getElementById("name").value.trim(),
+        cp = document.getElementById("customer_phone").value.trim(),
+        a = document.getElementById("address").value.trim(),
+        note = document.getElementById("note").value.trim(),
+        keys = Object.keys(c);
 
-    <div class="info">
-      <h2>Toyuq Dönəri Lavaşda</h2>
-      <p>
-        Toyuq əti, pomidor, xiyar, mayonez
-      </p>
-      <div class="price">3.50 AZN</div>
-    </div>
-  </div>
+    if(!keys.length) return alert("Əvvəlcə məhsul seçin.");
+    if(!n || !cp || !a) return alert("Zəhmət olmasa Adınızı, Nömrəni və Ünvanı yazın.");
 
-</main>
+    var t = 0, m = "Salam, Lavanda Restorandan sifariş vermək istəyirəm.\n\n";
+    for(var i=0; i<keys.length; i++) {
+        var index = keys[i];
+        var x = p[index], q = c[index];
+        t += x[2] * q;
+        m += x[1] + " — " + q + " ədəd — " + (x[2] * q).toFixed(2) + " AZN\n";
+    }
 
+    var deliveryFee = parseFloat(document.getElementById("deliveryZone").value) || 0;
+    var grandTotal = t + deliveryFee;
+
+    if (deliveryFee > 0) {
+        m += "\nÇatdırılma haqqı: " + deliveryFee.toFixed(2) + " AZN";
+    }
+
+    m += "\nYekun Məbləğ: " + grandTotal.toFixed(2) + " AZN\nAd: " + n + "\nNömrə: " + cp + "\nÜnvan: " + a;
+    if(note) m += "\nQeyd: " + note;
+
+    window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(m);
+}
+
+window.onload = function() {
+    renderCategories();
+    renderMenu();
+    renderCart();
+};
+</script>
 </body>
 </html>
