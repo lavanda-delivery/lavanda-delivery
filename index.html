@@ -419,7 +419,7 @@ function sendOrder() {
         m += "\nÇatdırılma haqqı: " + deliveryFee.toFixed(2) + " AZN";
     }
 
-    m += "\nYekun Məbləğ: " + grandTotal.toFixed(2) + " AZN\nAd: " + n + "\nNömrə: " + cp + "\nÜnvan: " + a;
+m += "\nYekun Məbləğ: " + grandTotal.toFixed(2) + " AZN\nAd: " + n + "\nNömrə: " + cp + "\nÜnvan: " + a;
     if(note) m += "\nQeyd: " + note;
 
     window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(m);
