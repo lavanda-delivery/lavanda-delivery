@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lavanda Restoran - Şəki | Səmeny Stil Menyu</title>
+<style>
+:root {
+    --primary-color: #6b3fa0;
+    --primary-hover: #583184;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #e5e7eb;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.5; }
+
+/* Header */
+header { background: var(--primary-color); color: #fff; padding: 24px 16px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+header h1 { font-size: 24px; margin-bottom: 4px; }
+header p { font-size: 14px; opacity: 0.9; }
+
+/* Main Layout */
+.container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 260px 1fr 340px; gap: 20px; }
+
+@media (max-width: 992px) {
+    .container { grid-template-columns: 1fr; }
+    .sidebar-categories, .sidebar-cart { order: 2; }
+    .main-content { order: 1; }
+}
+
+/* Categories Sidebar */
+.sidebar-categories { background: var(--card-bg); border-radius: 12px; padding: 16px; height: fit-content; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top: 20px; }
+.sidebar-categories h3 { font-size: 16px; margin-bottom: 12px; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+.cat-list { display: flex; flex-direction: column; gap: 6px; max-height: 70vh; overflow-y: auto; }
+.cat-item { padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; color: #4b5563; background: transparent; border: none; text-align: left; width: 100%; }
+.cat-item:hover { background: #f3f4f6; color: var(--primary-color); }
+.cat-item.active { background: var(--primary-color); color: #fff; }
+
+/* Search & Products */
+.main-content { display: flex; flex-direction: column; gap: 16px; }
+.search-box input { width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 10px; font-size: 15px; outline: none; background: var(--card-bg); transition: border-color 0.2s; }
+.search-box input:focus { border-color: var(--primary-color); }
+
+.category-section { margin-bottom: 24px; }
+.category-title { font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px; padding-bottom: 4px; border-bottom: 1px solid var(--border-color); }
+
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+.product-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+.product-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.08); }
+.product-img { width: 100%; height: 140px; object-fit: cover; }
+.product-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+.product-name { font-size: 14px; font-weight: 600; color: #1f2937; }
+.product-price { font-size: 14px; font-weight: 700; color: var(--primary-color); }
+
+.product-footer { padding: 0 12px 12px 12px; }
+.add-btn { width: 100%; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; padding: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.add-btn:hover { background: var(--primary-hover); }
+
+.counter { display: flex; align-items: center; justify-content: space-between; background: #f3f4f6; border-radius: 8px; padding: 2px; border: 1px solid var(--primary-color); }
+.counter button { background: var(--primary-color); color: #fff; border: none; border-radius: 6px; width: 28px; height: 28px; font-weight: bold; cursor: pointer; }
+.counter span { font-size: 14px; font-weight: 600; color: var(--primary-color); }
+
+/* Cart Sidebar */
+.sidebar-cart { background: var(--card-bg); border-radius: 12px; padding: 16px; height: fit-content; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top: 20px; }
+.sidebar-cart h3 { font-size: 16px; margin-bottom: 12px; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+.cart-items { max-height: 250px; overflow-y: auto; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; font-size: 13px; border-bottom: 1px solid #f3f4f6; padding-bottom: 6px; }
+.cart-item-info { flex-grow: 1; padding-right: 8px; }
+.cart-item-controls { display: flex; align-items: center; gap: 6px; }
+.cart-item-controls button { background: #ef4444; color: #fff; border: none; border-radius: 4px; width: 20px; height: 20px; font-size: 12px; cursor: pointer; }
+
+.checkout-form { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; border-top: 1px solid var(--border-color); padding-top: 12px; }
+.checkout-form input, .checkout-form select, .checkout-form textarea { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 13px; outline: none; }
+.checkout-form input:focus, .checkout-form select:focus, .checkout-form textarea:focus { border-color: var(--primary-color); }
+.total-box { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; color: #1f2937; margin: 8px 0; }
+.order-btn { width: 100%; background: #25D366; color: #fff; border: none; border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+.order-btn:hover { background: #22bf5b; }
+.empty-cart { color: #6b7280; font-size: 13px; text-align: center; padding: 20px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Lavanda Restoran</h1>
+    <p>Şəki • Onlayn Sifariş Sistemi</p>
+</header>
+
+<div class="container">
+    <!-- Sol: Kateqoriyalar -->
+    <div class="sidebar-categories">
+        <h3>Kateqoriyalar</h3>
+        <div id="categoryList" class="cat-list"></div>
+    </div>
+
+    <!-- Mərkəz: Məhsullar və Axtarış -->
+    <div class="main-content">
+        <div class="search-box">
+            <input type="text" id="searchInput" onkeyup="renderMenu()" placeholder="Restoranda axtarış et...">
+        </div>
+        <div id="menuContainer"></div>
+    </div>
+
+    <!-- Sağ: Səbət və Sifariş -->
+    <div class="sidebar-cart">
+        <h3>🛒 Səbətiniz</h3>
+        <div id="cartItems" class="cart-items"><div class="empty-cart">Səbətiniz hələ ki boşdur</div></div>
+        
+        <div class="checkout-form">
+            <label style="font-size: 12px; font-weight: 600; color: #4b5563;">Çatdırılma növü:</label>
+            <select id="deliveryZone" onchange="renderCart()">
+                <option value="0">Şəhərdaxili (Pulsuz)</option>
+                <option value="2.00">Şəhərdən kənar (+2.00 AZN)</option>
+            </select>
+
+            <div class="total-box">
+                <span>Cəmi:</span>
+                <span id="totalAmount">0.00 AZN</span>
+            </div>
+
+            <input type="text" id="custName" placeholder="Adınız və Soyadınız">
+            <input type="tel" id="custPhone" placeholder="Əlaqə nömrəniz">
+            <input type="text" id="custAddress" placeholder="Çatdırılma ünvanı">
+            <textarea id="custNote" placeholder="Qeyd (istəyə görə)" rows="2"></textarea>
+
+            <button class="order-btn" onclick="sendOrder()">WhatsApp ilə sifariş et</button>
+        </div>
+    </div>
+</div>
+
+<script>
+var restaurantPhone = "994558886383"; 
+var selectedCategory = "Hamısı";
+
+// Dəqiq və uyğun şəkillərlə yenilənmiş məhsul siyahısı
+var products = [
+    // Səhər Yeməkləri
+    ["Səhər Yeməkləri", "Qlazok", 3.00, "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400"],
+    ["Səhər Yeməkləri", "Qayğanaq", 3.50, "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400"],
+
+    // Salatlar
+    ["Salatlar", "Çoban salatı", 4.00, "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400"],
+    ["Salatlar", "Manqal salatı", 5.00, "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400"],
+    ["Salatlar", "Sezar salatı (toyuqlu)", 7.00, "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=400"],
+    ["Salatlar", "Yunan salatı", 6.00, "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400"],
+    ["Salatlar", "Paytaxt salatı", 5.00, "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400"],
+
+    // İsti Yeməklər
+    ["İsti Yeməklər", "Piti", 7.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+    ["İsti Yeməklər", "Şabalıdlı qovurma", 8.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=400"],
+    ["İsti Yeməklər", "Spaghetti (balonez)", 8.00, "https://images.unsplash.com/photo-1621996346565-e3d5d6281226?w=400"],
+    ["İsti Yeməklər", "Qaymaqlı Toyuq", 8.00, "https://images.unsplash.com/photo-1604908176997-125f2596f3c8?w=400"],
+    ["İsti Yeməklər", "Nar qovurma", 9.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=400"],
+
+    // Saclar
+    ["Saclar", "Sac toyuq", 20.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+    ["Saclar", "Sac Dana", 28.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+    ["Saclar", "Sac quzu", 30.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+    ["Saclar", "Sac qarışıq", 36.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+    // Şorbalar
+    ["Şorbalar", "Düşbərə", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+    ["Şorbalar", "Mərci", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+    ["Şorbalar", "Toyuq şorbası", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+    // Kabablar
+    ["Kabablar", "Lülə kabab", 7.00, "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400"],
+    ["Kabablar", "Tikə kabab", 7.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+    ["Kabablar", "Toyuq kababı", 4.50, "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400"],
+    ["Kabablar", "Antrikot", 8.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+    ["Kabablar", "Basdırma", 8.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+    ["Kabablar", "Xan kababı", 6.00, "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+    // Fast Food
+    ["Fast Food", "Burger + fri", 6.50, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"],
+    ["Fast Food", "Cizburger + fri", 7.00, "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400"],
+    ["Fast Food", "Club Sandwich + fri", 8.00, "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400"],
+    ["Fast Food", "Fri", 3.00, "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"],
+    ["Fast Food", "Nuggets + fri", 4.50, "https://images.unsplash.com/photo-1562967914-608f82629710?w=400"],
+
+    // Sərin İçkilər
+    ["Sərin İçkilər", "Coca-Cola 0.5L", 1.80, "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"],
+    ["Sərin İçkilər", "Fanta 0.5L", 1.80, "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"],
+    ["Sərin İçkilər", "Düşeş / Tərxun 0.5L", 3.00, "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"],
+    ["Sərin İçkilər", "Ayran", 0.80, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400"],
+
+    // Çay & Desertlər
+    ["Çay & Desertlər", "Şəki halvası", 5.00, "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+    ["Çay & Desertlər", "Çay çaynik", 2.00, "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"],
+    ["Çay & Desertlər", "Paxlava", 1.00, "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"]
+];
+
+var cart = {};
+
+function initCategories() {
+    var cats = ["Hamısı"];
+    for(var i=0; i<products.length; i++) {
+        if(cats.indexOf(products[i][0]) === -1) {
+            cats.push(products[i][0]);
+        }
+    }
+    
+    var html = "";
+    for(var j=0; j<cats.length; j++) {
+        var cat = cats[j];
+        var activeClass = (selectedCategory === cat) ? "active" : "";
+        html += `<button class="cat-item ${activeClass}" onclick="selectCategory('${cat}')">${cat}</button>`;
+    }
+    document.getElementById("categoryList").innerHTML = html;
+}
+
+function selectCategory(cat) {
+    selectedCategory = cat;
+    initCategories();
+    renderMenu();
+}
+
+function renderMenu() {
+    var searchVal = document.getElementById("searchInput").value.toLowerCase();
+    var cats = [];
+    for(var i=0; i<products.length; i++) {
+        if(cats.indexOf(products[i][0]) === -1) cats.push(products[i][0]);
+    }
+
+    var html = "";
+    for(var k=0; k<cats.length; k++) {
+        var cat = cats[k];
+        if(selectedCategory !== "Hamısı" && selectedCategory !== cat) continue;
+
+        var itemsHtml = "";
+        for(var m=0; m<products.length; m++) {
+            if(products[m][0] !== cat) continue;
+            if(searchVal && products[m][1].toLowerCase().indexOf(searchVal) === -1) continue;
+
+            var qty = cart[m] || 0;
+            var actionBtn = "";
+
+            if(qty > 0) {
+                actionBtn = `<div class="counter"><button onclick="changeQty(${m}, -1)">−</button><span>${qty}</span><button onclick="changeQty(${m}, 1)">+</button></div>`;
+            } else {
+                actionBtn = `<button class="add-btn" onclick="changeQty(${m}, 1)">Səbətə at</button>`;
+            }
+
+            itemsHtml += `
+                <div class="product-card">
+                    <img src="${products[m][3]}" class="product-img" alt="${products[m][1]}">
+                    <div class="product-body">
+                        <div class="product-name">${products[m][1]}</div>
+                        <div class="product-price">${products[m][2].toFixed(2)} AZN</div>
+                    </div>
+                    <div class="product-footer">
+                        ${actionBtn}
+                    </div>
+                </div>
+            `;
+        }
+
+        if(itemsHtml !== "") {
+            html += `
+                <div class="category-section">
+                    <div class="category-title">${cat}</div>
+                    <div class="products-grid">${itemsHtml}</div>
+                </div>
+            `;
+        }
+    }
+
+    document.getElementById("menuContainer").innerHTML = html || '<div style="text-align:center; padding:30px; color:#6b7280;">Məhsul tapılmadı.</div>';
+}
+
+function changeQty(index, delta) {
+    cart[index] = (cart[index] || 0) + delta;
+    if(cart[index] <= 0) {
+        delete cart[index];
+    }
+    renderMenu();
+    renderCart();
+}
+
+function renderCart() {
+    var keys = Object.keys(cart);
+    var html = "";
+    var subtotal = 0;
+
+    for(var i=0; i<keys.length; i++) {
+        var idx = keys[i];
+        var item = products[idx];
+        var qty = cart[idx];
+        var price = item[2] * qty;
+        subtotal += price;
+
+        html += `
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <b>${item[1]}</b><br><small>${qty} x ${item[2].toFixed(2)} AZN</small>
+                </div>
+                <div class="cart-item-controls">
+                    <span>${price.toFixed(2)} ₼</span>
+                    <button onclick="changeQty(${idx}, -1)">×</button>
+                </div>
+            </div>
+        `;
+    }
+
+    var deliveryFee = parseFloat(document.getElementById("deliveryZone").value) || 0;
+    var grandTotal = subtotal + (subtotal > 0 ? deliveryFee : 0);
+
+    document.getElementById("cartItems").innerHTML = html || '<div class="empty-cart">Səbətiniz hələ ki boşdur</div>';
+    document.getElementById("totalAmount").innerText = grandTotal.toFixed(2) + " AZN";
+}
+
+function sendOrder() {
+    var keys = Object.keys(cart);
+    if(keys.length === 0) {
+        alert("Zəhmət olmasa səbətə məhsul əlavə edin.");
+        return;
+    }
+
+    var name = document.getElementById("custName").value.trim();
+    var phone = document.getElementById("custPhone").value.trim();
+    var address = document.getElementById("custAddress").value.trim();
+    var note = document.getElementById("custNote").value.trim();
+
+    if(!name || !phone || !address) {
+        alert("Zəhmət olmasa Ad, Nömrə və Ünvan sahələrini doldurun.");
+        return;
+    }
+
+    var msg = "Salam, Lavanda Restorandan sifariş vermək istəyirəm:\n\n";
+    var subtotal = 0;
+
+    for(var i=0; i<keys.length; i++) {
+        var idx = keys[i];
+        var item = products[idx];
+        var qty = cart[idx];
+        var total = item[2] * qty;
+        subtotal += total;
+        msg += `• ${item[1]} - ${qty} ədəd (${total.toFixed(2)} AZN)\n`;
+    }
+
+    var deliveryFee = parseFloat(document.getElementById("deliveryZone").value) || 0;
+    var grandTotal = subtotal + deliveryFee;
+
+    if(deliveryFee > 0) {
+        msg += `\nÇatdırılma: ${deliveryFee.toFixed(2)} AZN`;
+    }
+    
+    msg += `\n*Yekun Məbləğ: ${grandTotal.toFixed(2)} AZN*\n\n`;
+    msg += `Ad: ${name}\nNömrə: ${phone}\nÜnvan: ${address}`;
+    if(note) msg += `\nQeyd: ${note}`;
+
+    window.location.href = `https://wa.me/${restaurantPhone}?text=` + encodeURIComponent(msg);
+}
+
+window.onload = function() {
+    initCategories();
+    renderMenu();
+    renderCart();
+};
+</script>
+
+</body>
+</html>
