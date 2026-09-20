@@ -93,6 +93,11 @@ input, textarea, select { width: 100%; padding: 12px; margin: 6px 0; border: 1px
 var phone = "994558886383";
 var selectedCategory = "Hamısı";
 var p = [
+    // Səhər Yeməkləri
+    ["Səhər Yeməkləri", "Qlazok", 3.00, "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=100"],
+    ["Səhər Yeməkləri", "Qayğanaq", 3.50, "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=100"],
+    
+    // Salatlar
     ["Salatlar", "Pomidor, xiyar", 3.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3qLAlHjKXY5us300WkuN8W35Y9hVzA-BpbPmhi5UyYg&s=10"],
     ["Salatlar", "Pendir", 4.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaXJNQVdmz_0kjS5QC0OVqKTBkx4YfSPu6Kg-JQ6_yfA&s=10"],
     ["Salatlar", "Süzmə", 3.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThUnIfoDpjZOliEntNYlbT_MWKmkVKVp2hkNmfseR_KQ&s=10"],
@@ -116,6 +121,7 @@ var p = [
     ["Salatlar", "Valdorf salatı", 6.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAtjWdXEukv68OMyBWiJ72ZKZ89JWIX0j3v1ICqDd-ow&s=10"],
     ["Salatlar", "Meyvə (mövsümə görə)", 7.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSosJpSrhrtFlQlx54r71ocatg3_bT435Y8Y_oZcq5TqQ&s=10"],
     
+    // İsti Yeməklər
     ["İsti Yeməklər", "Lavanda özəl yemək", 7.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["İsti Yeməklər", "Piti", 7.00, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
     ["İsti Yeməklər", "Səbəliqlı qovurma", 8.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
@@ -137,23 +143,33 @@ var p = [
     ["İsti Yeməklər", "Toyuq Stroqanov", 9.00, "https://images.unsplash.com/photo-1604908176997-125f2596f3c8?w=100"],
     ["İsti Yeməklər", "Fettuccine Alfredo", 9.00, "https://images.unsplash.com/photo-1621996346565-e3d5d6281226?w=100"],
     ["İsti Yeməklər", "Monastırsayağı toyuq", 9.00, "https://images.unsplash.com/photo-1604908176997-125f2596f3c8?w=100"],
+    
+    // Saclar
     ["Saclar", "Sac toyuq", 20.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Saclar", "Sac Dana", 28.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Saclar", "Sac quzu", 30.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Saclar", "Sac qarışıq", 36.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
+    
+    // Şorbalar
     ["Şorbalar", "Girş", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=100"],
     ["Şorbalar", "Düşbərə", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=100"],
     ["Şorbalar", "Mərcı", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=100"],
     ["Şorbalar", "Toyuq şorbası", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=100"],
     ["Şorbalar", "Göbələk şorbası", 5.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=100"],
     ["Şorbalar", "Pomidor şorbası", 3.00, "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=100"],
+    
+    // Qarnirlər
     ["Qarnirlər", "Düyü", 4.00, "https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?w=100"],
     ["Qarnirlər", "Kartof pürə", 4.00, "https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=100"],
     ["Qarnirlər", "Evsayağı kartof", 3.00, "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=100"],
+    
+    // Balıq Yeməkləri
     ["Balıq Yeməkləri", "Belamuq", 7.00, "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=100"],
     ["Balıq Yeməkləri", "Sudak", 7.00, "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=100"],
     ["Balıq Yeməkləri", "Sazan", 7.00, "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=100"],
     ["Balıq Yeməkləri", "Farel", 9.00, "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=100"],
+    
+    // Kabablar
     ["Kabablar", "Lülə kabab", 7.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Kabablar", "Tikə kabab", 7.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Kabablar", "Toyuq kababı", 4.50, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
@@ -176,6 +192,8 @@ var p = [
     ["Kabablar", "Basdırma", 8.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Kabablar", "Toyuq lüləsi", 5.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
     ["Kabablar", "Semiçka kababı", 5.00, "https://images.unsplash.com/photo-1544025162-d76694265947?w=100"],
+    
+    // Fast Food
     ["Fast Food", "Burger + fri", 6.50, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100"],
     ["Fast Food", "Chicken burger + fri", 6.50, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100"],
     ["Fast Food", "Cizburger + fri", 7.00, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100"],
@@ -192,6 +210,8 @@ var p = [
     ["Fast Food", "Fri", 3.00, "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=100"],
     ["Fast Food", "Nuggets + fri", 4.50, "https://images.unsplash.com/photo-1562967914-608f82629710?w=100"],
     ["Fast Food", "Soğan halqası + fri", 5.00, "https://images.unsplash.com/photo-1639024471283-03518883512d?w=100"],
+    
+    // Ət Dönərləri
     ["Ət Dönərləri", "Ət plovüstü dönər (400gr)", 8.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Ət Dönərləri", "Ət porsion dönər (300gr)", 8.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Ət Dönərləri", "Ət şaurma (250gr)", 4.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
@@ -199,6 +219,8 @@ var p = [
     ["Ət Dönərləri", "Ət dönər çörəkdə (200gr)", 3.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Ət Dönərləri", "Ət dönər lavaşda (200gr)", 4.00, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Ət Dönərləri", "Ət iskəndər dönər (350gr)", 8.00, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
+    
+    // Toyuq Dönərləri
     ["Toyuq Dönərləri", "Toyuq plovüstü dönər (400gr)", 6.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Toyuq Dönərləri", "Toyuq porsion dönər (300gr)", 6.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Toyuq Dönərləri", "Toyuq şaurma (250gr)", 3.20, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
@@ -206,11 +228,15 @@ var p = [
     ["Toyuq Dönərləri", "Toyuq dönər çörəkdə (200gr)", 2.50, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Toyuq Dönərləri", "Toyuq dönər lavaşda (200gr)", 3.00, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
     ["Toyuq Dönərləri", "Toyuq iskəndər dönər (350gr)", 6.00, "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=100"],
+    
+    // Xəmir Yeməkləri
     ["Xəmir Yeməkləri", "Ət Qutabı", 1.50, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
     ["Xəmir Yeməkləri", "Göy Qutabı", 0.80, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],                                             
     ["Xəmir Yeməkləri", "Gürcü Xəngəli 1 ədəd", 1.00, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
     ["Xəmir Yeməkləri", "Girs", 3.00, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
     ["Xəmir Yeməkləri", "Yarpaq Xəngəli", 5.00, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
+    
+    // Sərin İçkilər
     ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi Stəkan", 0.80, "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=100"],
     ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi 0.33L", 1.20, "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=100"],
     ["Sərin İçkilər", "Fanta, Coca cola, Sprite, Pepsi 0.5L", 1.80, "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=100"],
@@ -223,6 +249,8 @@ var p = [
     ["Sərin İçkilər", "Çöplü meyvə şirəsi", 1.00, "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=100"],
     ["Sərin İçkilər", "Kompot", 3.50, "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=100"],
     ["Sərin İçkilər", "Ayran", 0.80, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
+    
+    // Kokteyllər
     ["Kokteyllər", "Ice Coffee", 3.50, "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=100"],
     ["Kokteyllər", "Milkshakes Çiyələk", 4.50, "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=100"],
     ["Kokteyllər", "Milkshakes Banan", 4.50, "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=100"],
@@ -233,6 +261,8 @@ var p = [
     ["Kokteyllər", "Milkshakes Caramel", 5.00, "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=100"],
     ["Kokteyllər", "Milkshakes Şokolad", 5.00, "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=100"],
     ["Kokteyllər", "Moxito", 4.00, "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=100"],
+    
+    // Çay & Desertlər
     ["Çay & Desertlər", "Çay stəkan", 0.50, "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100"],
     ["Çay & Desertlər", "Çay çaynik", 2.00, "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100"],
     ["Çay & Desertlər", "Çay şokolad", 5.00, "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=100"],
@@ -247,12 +277,14 @@ var p = [
     ["Çay & Desertlər", "Mürəbbə kiçik/böyük", 3.00, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
     ["Çay & Desertlər", "Paxlava", 1.00, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
     ["Çay & Desertlər", "Türk paxlavası", 0.80, "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100"],
+    
+    // Kofelər
     ["Kofelər", "Kofe sadə", 2.00, "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100"],
     ["Kofelər", "Südlü kofe", 3.00, "https://images.unsplash.com/photo-1534778101976-62847782c213?w=100"],
     ["Kofelər", "Cappucino", 2.50, "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=100"],
     ["Kofelər", "Latte", 2.50, "https://images.unsplash.com/photo-1561882468-9110e53a1678?w=100"],
     ["Kofelər", "İsti şokolad", 2.50, "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=100"]
-]; // Son elementdən sonrakı artıq vergül silindi
+];
 
 var c = {};
 
