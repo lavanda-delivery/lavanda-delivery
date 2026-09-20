@@ -1,116 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restoran Menyusu</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
-        h2 {
-            color: #e67e22;
-            border-bottom: 2px solid #f1f2f6;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #e0e0e0;
-        }
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-        .item-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .item-info img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .item-name {
-            font-size: 16px;
-            font-weight: 500;
-        }
-        .item-price {
-            font-weight: bold;
-            color: #27ae60;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lavanda Restoran - Menyu</title>
+<style>
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; background: #f6f2ed; color: #222; }
+header { background: #6b3fa0; color: #fff; text-align: center; padding: 20px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
+
+.layout-container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: flex; gap: 20px; }
+.side-banner { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; }
+.side-banner img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
+.main-content { flex: 1; }
+
+.filter-box { background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+.cat-btns { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; margin-top: 10px; }
+.cat-btn { padding: 8px 14px; border-radius: 20px; border: 1px solid #6b3fa0; background: #fff; color: #6b3fa0; cursor: pointer; white-space: nowrap; font-weight: bold; }
+.cat-btn.active { background: #6b3fa0; color: #fff; }
+
+.cat { font-size: 20px; font-weight: bold; margin: 25px 0 10px; color: #6b3fa0; border-bottom: 2px solid #6b3fa0; padding-bottom: 5px; }
+.item, .cart { background: #fff; border-radius: 12px; padding: 14px; margin: 8px 0; box-shadow: 0 2px 7px rgba(0,0,0,0.08); }
+.item { display: flex; justify-content: space-between; align-items: center; }
+.item-info { display: flex; align-items: center; gap: 12px; }
+.item-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+.item button.add-btn { background: #6b3fa0; color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; font-weight: bold; }
+
+.counter { display: flex; align-items: center; background: #f0e8f8; border-radius: 8px; padding: 3px; border: 1px solid #6b3fa0; }
+.counter button { background: #6b3fa0; color: #fff; border: 0; border-radius: 6px; width: 28px; height: 28px; font-weight: bold; cursor: pointer; }
+.counter span { padding: 0 10px; font-weight: bold; color: #6b3fa0; }
+
+.cart { margin-top: 30px; border: 2px solid #6b3fa0; }
+input, textarea, select { width: 100%; padding: 12px; margin: 6px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; }
+.order { width: 100%; background: #25D366; color: #fff; border: 0; padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+.minus-btn { background: #e74c3c; color: #fff; border: 0; border-radius: 5px; padding: 2px 8px; margin-left: 8px; cursor: pointer; }
+
+@media (max-width: 800px) {
+    .layout-container { flex-direction: column; }
+    .side-banner { display: none; }
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Restoran Menyusu</h1>
+<header>
+    <h1 style="margin:0;">Lavanda Restoran</h1>
+    <div style="margin-top:5px;">Şəki • Şəhərdaxili çatdırılma pulsuzdur</div>
+</header>
 
-    <h2>Səhər Yeməkləri</h2>
-    <div class="menu-item">
-        <div class="item-info">
-            <img src="https://hezzinn.az/storage/01JS274ZJQ6VE99GKYES83T3Q6.jpg" alt="Qlazok">
-            <span class="item-name">Qlazok</span>
-        </div>
-        <span class="item-price">2.50 AZN</span>
+<div class="layout-container">
+    <div class="side-banner">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500" alt="Restoran">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Kabablar">
     </div>
-    <div class="menu-item">
-        <div class="item-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQftpWOdxuj4k4sfQDr8eaIY8up0iXbZ6Yke8PYTSmuFA&s=10" alt="Qayğanaq">
-            <span class="item-name">Qayğanaq</span>
+
+    <div class="main-content">
+        <div class="filter-box">
+            <input type="text" id="searchInput" onkeyup="renderMenu()" placeholder="Axtarış elə...">
+            <div id="categoryButtons" class="cat-btns"></div>
         </div>
-        <span class="item-price">2.50 AZN</span>
-    </div>
-    <div class="menu-item">
-        <div class="item-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOPqAJnNdtA-qbDEzg1tAAYGzf7Ssqd8OJlV4YbUk5yw&s=10" alt="Pomidor yumurta">
-            <span class="item-name">Pomidor yumurta</span>
+
+        <div id="menuContainer"></div>
+
+        <div class="cart">
+            <h2 style="margin-top:0;color:#6b3fa0;">🛒 Sifarişiniz</h2>
+            <div id="cart">Səbət boşdur.</div>
+            
+            <label style="display:block; margin-top:12px; font-weight:bold;">Çatdırılma zonası:</label>
+            <select id="deliveryZone" onchange="renderCart()">
+                <option value="0">Şəhərdaxili (Pulsuz)</option>
+                <option value="2">Şəhərdən kənar (+2.00 AZN)</option>
+            </select>
+
+            <h3 id="total">Cəmi: 0.00 AZN</h3>
+            
+            <input id="name" placeholder="Adınız və Soyadınız">
+            <input id="customer_phone" type="tel" placeholder="Əlaqə nömrəniz">
+            <input id="address" placeholder="Çatdırılma ünvanı">
+            <textarea id="note" placeholder="Müştəri qeydi"></textarea>
+            
+            <button class="order" onclick="sendOrder()">📲 WhatsApp-da sifariş et</button>
         </div>
-        <span class="item-price">3.50 AZN</span>
     </div>
-    <div class="menu-item">
-        <div class="item-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCyndA8-B3x2AQClX-8_bQuP6JNfifve2dXmeHwMiFRQ&s=10" alt="Kükü">
-            <span class="item-name">Kükü</span>
-        </div>
-        <span class="item-price">3.00 AZN</span>
+
+    <div class="side-banner">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500" alt="Restoran">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Burger">
     </div>
-    <div class="menu-item">
-        <div class="item-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSryDE_avURuCJjcbVUDujAiZNg8wwcHhzLKaj3Fb9gjQ&s" alt="Sosiska">
-            <span class="item-name">Sosiska</span>
-        </div>
-        <span class="item-price">3.50 AZN</span>
-    </div>
-    <div class="menu-item">
-        <div class="item-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi7WOrs--WKHa43ryzD7yU2q001yRC4LOVhCV6mZMgzA&s=10" alt="Sosiska yumurta">
-            <span class="item-name">Sosiska yumurta</span>
-        </div>
-        <span class="item-price">4.00 AZN</span>
-    </div>
+</div>
+
+<script>
+var phone = "994558886383";
+var selectedCategory = "Hamısı";
+    var p = [
 
     <h2>Salatlar</h2>
     <div class="menu-item"><div class="item-info"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3qLAlHjKXY5us300WkuN8W35Y9hVzA-BpbPmhi5UyYg&s=10" alt=""><span class="item-name">Pomidor, xiyar</span></div></div>
