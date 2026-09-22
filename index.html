@@ -330,12 +330,12 @@ var products = [
     ["Desertlər", "Paxlava", 1.00, "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
     ["Desertlər", "Türk paxlavası", 0.80, "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
 
-    // Kofelər
-    ["Kofelər", "Kofe sadə", 2.00, "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400"],
-    ["Kofelər", "Südlü kofe", 3.00, "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400"],
-    ["Kofelər", "Cappucino", 2.50, "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400"],
-    ["Kofelər", "Latte", 2.50, "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400"],
-    ["Kofelər", "İsti şokolad", 2.50, "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400"],
+    // Kofelər (Yenilənmiş şəkillərlə)
+    ["Kofelər", "Kofe sadə", 2.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAbD7JmkOvYTp1_vM3iBNnpU5F2LKuMMklnlyhGPMilQ&s"],
+    ["Kofelər", "Südlü kofe", 3.00, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAwgclU1uA8Xdqvk051EMVtxfV8Uym35zASn-tUiYtg&s=10"],
+    ["Kofelər", "Cappucino", 2.50, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhUBR-RbnEOQ7VLvC9NPIz41hSFIwLKu1hEgMkWvgnHQ&s=10"],
+    ["Kofelər", "Latte", 2.50, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxfeO5PGsjdYj8S42wcMWJTF3baXyifxppp5mZHMEJpA&s=10"],
+    ["Kofelər", "İsti şokolad", 2.50, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7IP14AEB_raD0UiBKtFiNuYHQ_FLXjWy-dfEUL2VXw&s=10"],
 
     // Setlər
     ["Setlər", "Burger Set (2 burger, 2 nugget, 2 fri, 2 cola)", 30.40, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"],
@@ -411,17 +411,25 @@ function renderMenu() {
             html += `
                 <div class="category-section">
                     <div class="category-title">${cat}</div>
-                    <div class="products-grid">${itemsHtml}</div>
+                    <div class="products-grid">
+                        ${itemsHtml}
+                    </div>
                 </div>
             `;
         }
+    }
+
+    if(html === "") {
+        html = '<div style="text-align:center; padding: 40px; color: #6b7280;">Axtarışınıza uyğun məhsul tapılmadı.</div>';
     }
 
     document.getElementById("menuContainer").innerHTML = html;
 }
 
 function changeQty(index, delta) {
-    if(!cart[index]) cart[index] = 0;
+    if(!cart[index]) {
+        cart[index] = 0;
+    }
     cart[index] += delta;
     if(cart[index] <= 0) {
         delete cart[index];
@@ -433,7 +441,7 @@ function changeQty(index, delta) {
 function renderCart() {
     var cartItemsEl = document.getElementById("cartItems");
     var keys = Object.keys(cart);
-    
+
     if(keys.length === 0) {
         cartItemsEl.innerHTML = '<div class="empty-cart">Səbətiniz hələ ki boşdur</div>';
         document.getElementById("totalAmount").innerText = "0.00 AZN";
@@ -453,8 +461,8 @@ function renderCart() {
         html += `
             <div class="cart-item">
                 <div class="cart-item-info">
-                    <div><strong>${item[1]}</strong></div>
-                    <div style="color: #6b7280; font-size: 12px;">${qty} x ${item[2].toFixed(2)} AZN</div>
+                    <strong>${item[1]}</strong><br>
+                    <small>${qty} x ${item[2].toFixed(2)} AZN</small>
                 </div>
                 <div class="cart-item-controls">
                     <span>${itemTotal.toFixed(2)} AZN</span>
@@ -468,6 +476,7 @@ function renderCart() {
 
     var deliveryFee = parseFloat(document.getElementById("deliveryZone").value);
     var grandTotal = subtotal + deliveryFee;
+
     document.getElementById("totalAmount").innerText = grandTotal.toFixed(2) + " AZN";
 }
 
@@ -482,47 +491,52 @@ function sendOrder() {
     var phone = document.getElementById("custPhone").value.trim();
     var address = document.getElementById("custAddress").value.trim();
     var note = document.getElementById("custNote").value.trim();
+    var deliverySelect = document.getElementById("deliveryZone");
+    var deliveryText = deliverySelect.options[deliverySelect.selectedIndex].text;
+    var deliveryFee = parseFloat(deliverySelect.value);
 
     if(!name || !phone || !address) {
-        alert("Zəhmət olmasa Ad, Əlaqə nömrəsi və Ünvan sahələrini doldurun!");
+        alert("Zəhmət olmasa ad, əlaqə nömrəsi və çatdırılma ünvanını qeyd edin!");
         return;
     }
 
-    var text = `*Yeni Sifariş - Lavanda Restoran*%0A%0A`;
-    text += `👤 *Müştəri:* ${name}%0A`;
-    text += `📞 *Telefon:* ${phone}%0A`;
-    text += `📍 *Ünvan:* ${address}%0A`;
-    
-    var deliveryFee = parseFloat(document.getElementById("deliveryZone").value);
-    text += `🚚 *Çatdırılma:* ${deliveryFee > 0 ? 'Şəhərdən kənar (+2.00 AZN)' : 'Şəhərdaxili (Pulsuz)'}%0A`;
-    
+    var text = "🛒 *Yeni Sifariş - Lavanda Restoran*\n\n";
+    text += `👤 *Müştəri:* ${name}\n`;
+    text += `📞 *Telefon:* ${phone}\n`;
+    text += `📍 *Ünvan:* ${address}\n`;
+    text += `🚚 *Çatdırılma:* ${deliveryText}\n`;
     if(note) {
-        text += `📝 *Qeyd:* ${note}%0A`;
+        text += `📝 *Qeyd:* ${note}\n`;
     }
+    text += "\n--------------------------\n*Sifariş edilən məhsullar:*\n";
 
-    text += `%0A*Sifariş məhsulları:*%0A`;
     var subtotal = 0;
-
     for(var i=0; i<keys.length; i++) {
         var idx = keys[i];
         var qty = cart[idx];
         var item = products[idx];
         var itemTotal = item[2] * qty;
         subtotal += itemTotal;
-        text += `- ${item[1]} (${qty} əd.) - ${itemTotal.toFixed(2)} AZN%0A`;
+        text += `▪️ ${item[1]} - ${qty} əd. x ${item[2].toFixed(2)} AZN = ${itemTotal.toFixed(2)} AZN\n`;
     }
 
     var grandTotal = subtotal + deliveryFee;
-    text += `%0A*Cəmi məbləğ: ${grandTotal.toFixed(2)} AZN*`;
+    text += "--------------------------\n";
+    text += `məhsullar üzrə cəmi: ${subtotal.toFixed(2)} AZN\n`;
+    text += `*Yekun məbləğ (çatdırılma daxil): ${grandTotal.toFixed(2)} AZN*`;
 
-    var whatsappUrl = `https://wa.me/${restaurantPhone}?text=${text}`;
+    var encodedText = encodeURIComponent(text);
+    var whatsappUrl = `https://wa.me/${restaurantPhone}?text=${encodedText}`;
+    
     window.open(whatsappUrl, '_blank');
 }
 
-// Səhifə yüklənəndə işə düşür
-initCategories();
-renderMenu();
-renderCart();
+// Səhifə yüklənəndə işə düşən funksiyalar
+window.onload = function() {
+    initCategories();
+    renderMenu();
+    renderCart();
+};
 </script>
 </body>
 </html>
