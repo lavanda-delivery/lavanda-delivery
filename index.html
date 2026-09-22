@@ -258,6 +258,89 @@
             background: #218838;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close-modal:hover {
+            color: #000;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        .submit-order-btn {
+            background: #28a745;
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-order-btn:hover {
+            background: #218838;
+        }
+
         @media (max-width: 480px) {
             .menu-items {
                 grid-template-columns: 1fr;
@@ -278,6 +361,8 @@
 
     <div class="categories" id="categoriesContainer">
         <button class="category-btn active" onclick="filterCategory('all')">Hamısı</button>
+        <button class="category-btn" onclick="filterCategory('Səhər Yeməyi')">Səhər Yeməyi</button>
+        <button class="category-btn" onclick="filterCategory('Salatlar')">Salatlar</button>
         <button class="category-btn" onclick="filterCategory('Saclar')">Saclar</button>
         <button class="category-btn" onclick="filterCategory('Şorbalar')">Şorbalar</button>
         <button class="category-btn" onclick="filterCategory('Qarnirlər')">Qarnirlər</button>
@@ -291,16 +376,57 @@
     </div>
 
     <div class="menu-container" id="menuContainer">
-        <!-- Menyu JavaScript vasitəsilə dinamik yüklənəcək -->
+        <!-- Menyu dinamik olaraq yüklənəcək -->
     </div>
 
     <div class="cart-bar" id="cartBar" style="display: none;">
         <div class="cart-info" id="cartInfo">Səbət boşdur (0 AZN)</div>
-        <button class="checkout-btn" onclick="sendOrder()">Sifarişi Tamamla</button>
+        <button class="checkout-btn" onclick="openModal()">Sifarişi Tamamla</button>
+    </div>
+
+    <!-- Müştəri Məlumatları Modalı -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Müştəri Məlumatları</h3>
+            <div class="form-group">
+                <label for="customerName">Ad və Soyad:</label>
+                <input type="text" id="customerName" placeholder="Məsələn: Əli Məmmədov">
+            </div>
+            <div class="form-group">
+                <label for="customerPhone">Əlaqə nömrəsi:</label>
+                <input type="text" id="customerPhone" placeholder="050-123-45-67">
+            </div>
+            <div class="form-group">
+                <label for="customerAddress">Ünvan:</label>
+                <textarea id="customerAddress" rows="2" placeholder="Çatdırılma ünvanı..."></textarea>
+            </div>
+            <button class="submit-order-btn" onclick="sendOrderWhatsApp()">WhatsApp-a Göndər</button>
+        </div>
     </div>
 
     <script>
         const menuData = [
+            {
+                category: "Səhər Yeməyi",
+                items: [
+                    { name: "Kənd Səhər Yeməyi (2 nəfərlik)", price: 25, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-N8m87V6jYx9YFkY5Sj3QJj8Wd1g4Y1Q8Q&s=10" },
+                    { name: "Omlet Sadə", price: 4, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz9G5d6Vv1J9c9w5Fq7d8Q2gKj2L9F1w9z8A&s=10" },
+                    { name: "Pomidor-Yumurta", price: 5, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7f1g2Q5v3K8x9L6m4N2p1S3v5D7f8G9h0jA&s=10" },
+                    { name: "Sucuklu Yumurta", price: 6, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8q3w1e2s4d6f7g8h9j0k1l2z3x4c5v6b7n8m&s=10" },
+                    { name: "Qayğanaq", price: 4, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5y6u7i8o9p0a1s2d3f4g5h6j7k8l9z0x1c2v&s=10" },
+                    { name: "Kükü", price: 5, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3w2e1r4t5y6u7i8o9p0a1s2d3f4g5h6j7k8l9&s=10" }
+                ]
+            },
+            {
+                category: "Salatlar",
+                items: [
+                    { name: "Çoban Salatı", price: 4, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9rBhs-r9dP6peNlvX48SkNNHoEbnTOyO9a8R--aE_pw&s=10" },
+                    { name: "Mövsüm Salatı", price: 5, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9R5PrzQ7snXofmHm9s2QTmlVwstRc5jG3m1svXPLrPw&s=10" },
+                    { name: "Sezar Salatı Toyuq ilə", price: 8, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVJcrtgduBM6H-DGrN1TUpvOlsjZHsl_G-LAYYy16zbA&s=10" },
+                    { name: "Manqal Salatı", price: 5, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2GDBf76fCKZbgSdDD2NDyP50Geafv5FiSL7nBHuNClw&s=10" }
+                ]
+            },
             {
                 category: "Saclar",
                 items: [
@@ -586,8 +712,30 @@
             }
         }
 
-        function sendOrder() {
-            let message = "Salam, Lavanda Restoranından yeni sifariş:\n\n";
+        function openModal() {
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function sendOrderWhatsApp() {
+            const name = document.getElementById('customerName').value.trim();
+            const phoneNum = document.getElementById('customerPhone').value.trim();
+            const address = document.getElementById('customerAddress').value.trim();
+
+            if (!name || !phoneNum || !address) {
+                alert("Zəhmət olmasa bütün müştəri məlumatlarını doldurun!");
+                return;
+            }
+
+            let message = `🛒 *Lavanda Restoranından Yeni Sifariş*\n\n`;
+            message += `👤 *Ad:* ${name}\n`;
+            message += `📞 *Əlaqə:* ${phoneNum}\n`;
+            message += `📍 *Ünvan:* ${address}\n\n`;
+            message += `📋 *Sifarişlər:*\n`;
+
             let totalPrice = 0;
 
             menuData.forEach(cat => {
@@ -600,15 +748,14 @@
                 });
             });
 
-            message += `\nÜmumi məbləğ: ${totalPrice} AZN`;
+            message += `\n💰 *Ümumi məbləğ:* ${totalPrice} AZN`;
 
-            // WhatsApp-a yönləndirmə (nömrəni öz nömrənizlə dəyişə bilərsiniz)
-            const phone = "994501234567"; 
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            const restaurantPhone = "994501234567"; 
+            const url = `https://wa.me/${restaurantPhone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
+            closeModal();
         }
 
-        // İlkin yüklənmə
         renderMenu();
     </script>
 </body>
