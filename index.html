@@ -1,0 +1,1310 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lavanda Restoran - Şəki | Onlayn Sifariş</title>
+
+<style>
+:root {
+    --primary-color: #6b3fa0;
+    --primary-hover: #583184;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* Header */
+header {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Main */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 260px 1fr 340px;
+    gap: 20px;
+}
+
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-categories,
+    .sidebar-cart {
+        order: 2;
+    }
+
+    .main-content {
+        order: 1;
+    }
+}
+
+/* Categories */
+.sidebar-categories {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 16px;
+    height: fit-content;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
+}
+
+.sidebar-categories h3,
+.sidebar-cart h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.cat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.cat-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    color: #4b5563;
+    background: transparent;
+    border: none;
+    text-align: left;
+    width: 100%;
+}
+
+.cat-item:hover {
+    background: #f3f4f6;
+    color: var(--primary-color);
+}
+
+.cat-item.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Search */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    background: var(--card-bg);
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+}
+
+/* Products */
+.category-section {
+    margin-bottom: 24px;
+}
+
+.category-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.product-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+}
+
+.product-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    background: #eee;
+}
+
+.product-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.product-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.product-footer {
+    padding: 0 12px 12px;
+}
+
+.add-btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: var(--primary-hover);
+}
+
+/* Counter */
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 2px;
+    border: 1px solid var(--primary-color);
+}
+
+.counter button {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.counter span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Cart */
+.sidebar-cart {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 16px;
+    height: fit-content;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
+}
+
+.cart-items {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 6px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+    padding-right: 8px;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cart-item-controls button {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+}
+
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus,
+.checkout-form textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.total-box {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 8px 0;
+}
+
+.order-btn {
+    width: 100%;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.order-btn:hover {
+    background: #22bf5b;
+}
+
+.empty-cart {
+    color: #6b7280;
+    font-size: 13px;
+    text-align: center;
+    padding: 20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Lavanda Restoran</h1>
+    <p>Şəki • Onlayn Sifariş Sistemi</p>
+</header>
+
+<div class="container">
+
+    <!-- Kateqoriyalar -->
+    <div class="sidebar-categories">
+        <h3>Kateqoriyalar</h3>
+        <div id="categoryList" class="cat-list"></div>
+    </div>
+
+    <!-- Məhsullar -->
+    <div class="main-content">
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                onkeyup="renderMenu()"
+                placeholder="Restoranda axtarış et..."
+            >
+        </div>
+
+        <div id="menuContainer"></div>
+
+    </div>
+
+    <!-- Səbət -->
+    <div class="sidebar-cart">
+
+        <h3>🛒 Səbətiniz</h3>
+
+        <div id="cartItems" class="cart-items">
+            <div class="empty-cart">
+                Səbətiniz hələ ki boşdur
+            </div>
+        </div>
+
+        <div class="checkout-form">
+
+            <label style="font-size:12px;font-weight:600;color:#4b5563;">
+                Çatdırılma növü:
+            </label>
+
+            <select id="deliveryZone" onchange="renderCart()">
+                <option value="0">Şəhərdaxili (Pulsuz)</option>
+                <option value="2">Şəhərdən kənar (+2.00 AZN)</option>
+            </select>
+
+            <div class="total-box">
+                <span>Cəmi:</span>
+                <span id="totalAmount">0.00 AZN</span>
+            </div>
+
+            <input type="text" id="custName" placeholder="Adınız və Soyadınız">
+
+            <input type="tel" id="custPhone" placeholder="Əlaqə nömrəniz">
+
+            <input type="text" id="custAddress" placeholder="Çatdırılma ünvanı">
+
+            <textarea
+                id="custNote"
+                placeholder="Qeyd (istəyə görə)"
+                rows="2"
+            ></textarea>
+
+            <button class="order-btn" onclick="sendOrder()">
+                WhatsApp ilə sifariş et
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+/* RESTORAN WHATSAPP */
+var restaurantPhone = "994558886383";
+
+var selectedCategory = "Hamısı";
+
+/*
+    MƏHSULLAR
+    [Kateqoriya, Məhsul adı, Qiymət, Şəkil]
+*/
+
+var products = [
+
+/* SƏHƏR YEMƏKLƏRİ */
+
+["Səhər yeməkləri","Səhər Yeməyi Seti (1 nəfər üçün)",10.00,"https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400"],
+
+["Səhər yeməkləri","Qlazok",2.50,"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400"],
+
+["Səhər yeməkləri","Qayğanaq",2.50,"https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400"],
+
+["Səhər yeməkləri","Pomidor yumurta",3.50,"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400"],
+
+["Səhər yeməkləri","Kükü",3.00,"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"],
+
+["Səhər yeməkləri","Sosiska",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkif-b--fPubSoeckJV_V3RWSntMzpS0z7mc5lPeZ4lg&s"],
+
+["Səhər yeməkləri","Sosiska yumurta",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkif-b--fPubSoeckJV_V3RWSntMzpS0z7mc5lPeZ4lg&s"],
+
+["Səhər yeməkləri","Tərəvəzli omlet",3.50,"https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400"],
+
+
+/* SALATLAR */
+
+["Salatlar","Pomidor, xiyar",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3qLAlHjKXY5us300WkuN8W35Y9hVzA-BpbPmhi5UyYg&s=10"],
+
+["Salatlar","Pendir",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaXJNQVdmz_0kjS5QC0OVqKTBkx4YfSPu6Kg-JQ6_yfA&s=10"],
+
+["Salatlar","Süzmə",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThUnIfoDpjZOliEntNYlbT_MWKmkVKVp2hkNmfseR_KQ&s=10"],
+
+["Salatlar","Qatıq",2.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFYvxFIZ2PzyA1dnXbLEH04kk_xYZ895al_Rnj5JlkCw&s=10"],
+
+["Salatlar","Turşu assorti",4.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM5V3Q3ETWsZYch5bmAGwAmlJP0iZZ3VA51OMjxU0faw&s=10"],
+
+["Salatlar","Döyməc",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_GO_i6dJ7MzpOzTA7NiOqystpXrriQfKk9399NRkLFgxioJUkf3A0dws&s=10"],
+
+["Salatlar","Meyvə (mövsümə görə)",10.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSosJpSrhrtFlQlx54r71ocatg3_bT435Y8Y_oZcq5TqQ&s=10"],
+
+["Salatlar","Göyərti",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwSxykxELZHMcApAqbDSkSCCL93KGA_uP9oD4wRMnMcQ&s=10"],
+
+["Salatlar","Acika",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsyHaT63q_eGTOD8sKJ1f5tQuAqHjNLMb_TxG4ka10Yw&s"],
+
+["Salatlar","Zeytun",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT48ir4KsplgQ_uCy2gOLt6lOg_XXCx7989Wuy0YcUmMw&s=10"],
+
+["Salatlar","Valdorf salatı",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAtjWdXEukv68OMyBWiJ72ZKZ89JWIX0j3v1ICqDd-ow&s=10"],
+
+["Salatlar","Çoban salatı",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7fktodDf8KKTZTz5apvU32t2vG8pTggwcM2d_4BkH_g&s=10"],
+
+["Salatlar","Sparja salatı",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt5CoSy7Pba7BDE7TwrWCxpfM_JiXeyQmVSJOAuMov_g&s=10"],
+
+["Salatlar","Rafaello salati",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxMH_j8Gp1D2ybKW13JILAzcYepAs2x1_G5-SXjaJLgw&s=10"],
+
+["Salatlar","Xırçıltılı Badımcan salatı",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTubMmkGOm1CU4ymm4NV_5nELmyVlTVTxX-6NmP17zRAQ&s=10"],
+
+["Salatlar","Kök salatı",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW1EoC-9QWsEZ7KjsvZaHnjAZlMwLCVUixCxGQb2JHyw&s=10"],
+
+["Salatlar","Paytaxt salatı",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc0wZfMa624wjfA2mhGJQ2qhS4mAgcrjPmbjPCLfCvIA&s=10"],
+
+["Salatlar","Mimoza salatı",4.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSysWDOxKkGdH57NN4rQYECJOM6T-qXEHKcDPaJNucZLA&s=10"],
+
+["Salatlar","Sezar salatı (toyuqlu)",8.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK8pPxf5jCEWMabrZVdNl9Jd1NB0UWCDwZk-hHemhquQ&s=10"],
+
+["Salatlar","Yunan salatı",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC8MOteeu6EgzHiAJdvuwg7srzTqp5EDu0sXUNPQp0mg&s=10"],
+
+["Salatlar","Manqal salatı",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFK4OluqjIMialFBjD45mu6A7vA4CELXlOgFMnL1uJVA&s=10"],
+
+["Salatlar","Rəngli bibər salatı",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX-XzSQF_GOaTvwsyYmxxFqo_z366zV_51qEKCrFK27w&s=10"],
+
+
+/* İSTİ YEMƏKLƏR */
+
+["İsti yeməklər","Lavanda özəl yemək",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOPgh4JrnP0TChDwmn5Tf9YQ5aR-n7ssoRhjdLpWMKvQ&s=10"],
+
+["İsti yeməklər","Piti",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcQUlaS6o5uH_vnwxZzxf9KpZ31m1Ubdl4Zh0QXxyuew&s=10"],
+
+["İsti yeməklər","Şabalıdlı qovurma",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDMAS5PyMqwxHGJV8QQkq4zFbXyHw2LVlJyc30v3FnvQ&s=10"],
+
+["İsti yeməklər","Spaghetti (balonez)",8.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4NRpB4yE0Tf_OU98vfk_eoafyp49V-tXW-__CFYq4JA&s=10"],
+
+["İsti yeməklər","Toyuq langeti",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4v75VACbdyqS7qw5qbbohDNZy0URObJp_h7OObWqFqA&s=10"],
+
+["İsti yeməklər","Qaymaqlı Toyuq",8.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnx4EgxJm6yD50DaatXAuJLxzFcvLfqdvu6hWa_x_iqQ&s=10"],
+
+["İsti yeməklər","Tava Kabab",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqzpsFbu1-8tCulHM196rUSF5HAKqvZbl4K_NihPz-dg&s=10"],
+
+["İsti yeməklər","Nar qovurma",9.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlMDWe_rgpZA6P7lmCvoEfHWgRhjgktsX9rfyjsaKHmA&s=10"],
+
+["İsti yeməklər","Dobu dolması",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLiZZRcSuJtYFaQeU6ymdYKb9p88rEt2PKTNXQN2EsrA&s=10"],
+
+["İsti yeməklər","Juliyen sadə",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF1wR9Oh0FAHO6I_C7fe1YQDpaWiQU3wQr7tsNK0ahBQ&s=10"],
+
+["İsti yeməklər","Julien mal",8.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwlnr8QfkiTiFVbXefJP1sQ6qZ_6qTXf42Wnjdx2xaEQ&s=10"],
+
+["İsti yeməklər","Kiyev kotleti",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7sGVjU8mF9DRA-SnPUdfls3awJcHWU_1EspC4D8xKLQ&s=10"],
+
+["İsti yeməklər","Toyuq sote",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoDlrKZXRhGBs6YS_F3tdA9EjJVLFUyoOUNij6VB2YzA&s=10"],
+
+["İsti yeməklər","Toyuq çığırtma (bütöv)",18.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6UwSM3t-oFWNXfswespJ1je1i_D7QQaGKEkZooQgB_w&s=10"],
+
+["İsti yeməklər","Toyuq Şnitzel",7.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYXU9cWRRL--gmT6j6pzIOBNYD0JSEXkzJQNUrQ8iTmg&s"],
+
+["İsti yeməklər","Ət Stroqanov",13.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMKbkzwn1jac-r6KFfit_zF-g-XOkuq1-33E90p4ARdg&s=10"],
+
+["İsti yeməklər","Toyuq Stroqanov",9.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8Vb3zcJATiIL41iHtl_1PoE--O3V9SfkgpHy1qjZRw&s=10"],
+
+["İsti yeməklər","Fettuccine Alfredo",9.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJS56MFpKDsWTzMLyjZN3BBbpo6L_141-JpvTED9tK9A&s=10"],
+
+["İsti yeməklər","Monastırsayağı toyuq",9.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhTy_D5Wnifl-wnB-IIjqXaIPbWI6WXx_H-cyf_iZSrg&s=10"],
+
+["İsti yeməklər","Sac toyuq",20.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["İsti yeməklər","Sac Dana",28.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["İsti yeməklər","Sac quzu",30.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["İsti yeməklər","Sac qarışıq",36.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+
+/* ŞORBALAR */
+
+["Şorbalar","Girs",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Şorbalar","Düşbərə",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Şorbalar","Mərci",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Şorbalar","Toyuq şorbası",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Şorbalar","Göbələk şorbası",5.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Şorbalar","Pomidor şorbası",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+
+/* QARNİRLƏR */
+
+["Qarnirlər","Düyü",4.00,"https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?w=400"],
+
+["Qarnirlər","Kartof pürə",4.00,"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"],
+
+["Qarnirlər","Ev sayağı kartof",3.00,"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"],
+
+
+/* BALIQ */
+
+["Balıq Yeməkləri","Belamur",7.00,"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400"],
+
+["Balıq Yeməkləri","Sazan",7.00,"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400"],
+
+["Balıq Yeməkləri","Sudak",7.00,"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400"],
+
+["Balıq Yeməkləri","Farel",9.00,"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400"],
+
+
+/* KABABLAR */
+
+["Kabablar","Lülə kabab",7.00,"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400"],
+
+["Kabablar","Tikə kabab",7.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Toyuq kabab",4.50,"https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400"],
+
+["Kabablar","Adana kabab",8.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Kartof lüləsi",3.50,"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"],
+
+["Kabablar","İzgara köftə",6.00,"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400"],
+
+["Kabablar","İzgara Dana əti",10.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Toyuq tabaka",18.00,"https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400"],
+
+["Kabablar","Çolpa Setka",13.00,"https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400"],
+
+["Kabablar","Toyuq lüləsi pendirli",6.00,"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400"],
+
+["Kabablar","İçalat kababı",6.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Qədim nuxa kababı",14.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Xan kababı",6.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Qozlu lülə kabab",10.00,"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400"],
+
+["Kabablar","Quyruq kababı",7.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Şiş kababı (uşaqlar üçün)",4.50,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","File kabab",5.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Tərəvəz kabab",1.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Antirikot",8.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Basdırma",8.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+["Kabablar","Toyuq lüləsi",5.00,"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400"],
+
+["Kabablar","Semiçka kababı",5.00,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"],
+
+
+/* FAST FOOD */
+
+["Fast food","Burger + fri",6.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnyF_fUyleMLP8_lhafas2uNDMxiDaqciepHHtnnJTzQ&s=10"],
+
+["Fast food","Chicken burger + fri",6.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSCqXKo_hD5HTsai3KNzesC7ECmZK82qzeM0RL5F2sQA&s=10"],
+
+["Fast food","Çizburger + fri",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToCJtvr8KFsWudaOhDdxkAFbV7hoygy49itj9FbNvwlA&s=10"],
+
+["Fast food","Double burger + fri",9.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyIChtvybc-53x2FFCyqfq7gP9aTXIRAyoWDSurwPzaw&s=10"],
+
+["Fast food","Pendir Çubuqları + fri",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmmsB0fdWvqpkCtmZjrgG8ULpIPI6SkMiOqWup0cNIsg&s=10"],
+
+["Fast food","Toyuq Çubuqları + fri",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkzR-edW3YIMV2KClcvFOt-qEzU5XiG2DEqpKZqoIo5w&s=10"],
+
+["Fast food","Toyuq Budu + fri",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlb-x8sTK3DtZ4fX-NVfe3sA0ItRqQDRdCmSYyuYNXCA&s=10"],
+
+["Fast food","Club Sandiwich + fri",8.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJs4wp0REhgw4t__k_dKTQv80JsytnoVjcLWtnlhyzpg&s=10"],
+
+["Fast food","KFC qanadları + fri",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuecei8WxOFTGDOK0TTKYw5C1ztjykc9T_bo11JylHwA&s=10"],
+
+["Fast food","Acılı toyuq qanadları + fri",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHU6ksb9aH75XxwXbZSbf8Ujrnj2hAbqIL_1vt0LMmyA&s=10"],
+
+["Fast food","Langet toyuq + fri",7.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFfdHAb2sfPLbemEgoJrgIcgB01hnQ9W6JJoaCRscnzQ&s=10"],
+
+["Fast food","Şintsel toyuq + fri",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzipUmWkkjNtWMzu-nZ459YfauDQuUOuoGFDSt8LO6Aw&s=10"],
+
+["Fast food","Tost sucuklu + fri",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuJKPi6mvDuskkC765aKF7fN1vOfTNsCAbxV61c3C9Yg&s=10"],
+
+["Fast food","Fri",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlWnuCXUMQomxCIznLISCldDImikq3xsyLw47yGxCuQw&s=10"],
+
+["Fast food","Nuggets + fri",4.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPM4OTIea4QQkJykveUIQiTIk-eAvqgNRAH6UybbovDg&s=10"],
+
+["Fast food","Soğan halqası + fri",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiGq6LJBl3eo4omO2qMks3go_I3qLo3WVal54CMaQ2HA&s=10"],
+
+
+/* XƏMİR YEMƏKLƏRİ */
+
+["Xəmir yeməkləri","Ət Qutabı",1.50,"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"],
+
+["Xəmir yeməkləri","Göy Qutabı",0.80,"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"],
+
+["Xəmir yeməkləri","Girs",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Xəmir yeməkləri","Yarpaq Xəngəli",5.00,"https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400"],
+
+["Xəmir yeməkləri","Gürcü Xəngəli (1 ədəd)",1.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+["Xəmir yeməkləri","Düşbərə",3.00,"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"],
+
+
+/* PİZZALAR */
+
+["Pizzalar","Lavanda Pizza",18.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZmVqOCUEVn1KMYf3UJqAewIFBu9It6kTAtibIn5W8ew&s=10"],
+
+["Pizzalar","Lavanda Pizza Kənarı Pendirli",20.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiDgCfk15nySstPd4dngHDYQ8qVpC1Vz9JUKv41ATh3Q&s=10"],
+
+["Pizzalar","Toyuqlu pizza",13.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa_6bEW_-uzO6uJzR2VpB8u_Uw_aI1kjewLnIBsyiCNw&s=10"],
+
+["Pizzalar","Pizza göbələk",11.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMFRuDA85v5vndU32Ajnr-bp3KxSbHg7wxiUPSd5KGLA&s=10"],
+
+["Pizzalar","Pepperoni",13.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDlL_JRoCUGwsP-8PaOp0joqaGN1HeZImQG-Ffo_q1Nw&s=10"],
+
+["Pizzalar","Margherita",10.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDK3uM2PrEPNZxB_9Ujn4ey3EYAv_SNh0GL6DiKOp2eQ&s=10"],
+
+["Pizzalar","Qapalı pizza",13.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQLWG1qLGFcQgnma7s3Vs32UqZS_AfjJ6fGSQgmoYJlQ&s=10"],
+
+["Pizzalar","Sosisli pizza",12.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR47OPuPIcHAHpRUXdKWnxNzXdUavGmEcXzKFysZARfYg&s=10"],
+
+["Pizzalar","Qıymalı pizza",15.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOFv99Y6ds2ow_UEB3CBTvIFr74xk2l-rtIq7LqMLPrg&s=10"],
+
+["Pizzalar","Qarışıq pizza",17.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPlOmpCU88CvwQgr5h6pJ9rc2C4rcDI_A8evdrx-h1g&s=10"],
+
+
+/* PİDE VƏ LAHMACUN */
+
+["Pide və Lahmacun","Lahmacun pendirli",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIgPLxvItrvllvEwQ3xt3kSEiV3nBtTP3Zr6wJRTtcVw&s=10"],
+
+["Pide və Lahmacun","Lahmacun sadə",2.80,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMVBK7jp4XhdATwR9hP7MHCUNNdb3EcCmlSgan1_cLVw&s=10"],
+
+["Pide və Lahmacun","Pide pendirli",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgNiS224HWzlh7vi8qL5h6VXmfiwX45yAlQOF87d1ICA&s=10"],
+
+["Pide və Lahmacun","Pide toyuqlu",5.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGxArU2HlSYhqjX_8NEnIIEuuEI0-7qPlejlbx9eN-ow&s=10"],
+
+["Pide və Lahmacun","Pide sucuklu",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq90vTa0rkAVh-T9e3lVP25bCeI1Di6b7XBVtQJNGk3A&s=10"],
+
+["Pide və Lahmacun","Pide qarışıq",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScLRDNvHJ_kDelo5ZOYvNXrgoWhIsvq1tW0mT3ScRp2g&s=10"],
+
+["Pide və Lahmacun","Pide qıymalı",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yk1DBC97Kk9aLggoFp6E8L9Z9b3ybgq3q_RXdxQZ2Q&s=10"],
+
+["Pide və Lahmacun","Pide quşbaşı",6.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeQZhI4MGAK4RQflKq4BeAcGJ-q9w4G7yVtweSxql5YQ&s=10"],
+
+
+/* DÖNƏRLƏR */
+
+["Dönərlər","Toyuqlu Şaurma Lavaşda",3.20,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH8x44kzbnnlFEZsJDYoLupSq3WkvoiGqKOPS87fMAzQ&s=10"],
+
+["Dönərlər","Toyuqlu İskəndər Dönəri",6.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOk4T9lEN2qKw-Wg-edqu_Htfge54gjrW-1UAmLWba7UapGvipQvuyW8HI&s=10"],
+
+["Dönərlər","Toyuq Dönəri Çörəkdə",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6x5I1pnr5vHEmHeJsv9JbItEbBcQdKDu8e76kTFIYuC2Nj5Zp3CLR0IU&s=10"],
+
+["Dönərlər","Toyuq Dönəri Lavaşda",2.80,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqRPy_wKw6K_-TgyouL465AXsurNB1CcBuFUIVhjyBJA&s=10"],
+
+["Dönərlər","Toyuqlu Basdırma Dönər Çörəkdə",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR56KB0D9Cdr3yynbS5xYbthec9KLA9UvuVMVgu_eGqPg&s"],
+
+["Dönərlər","Toyuqlu Porsiyon Dönəri",6.50,"https://imageproxy.wolt.com/assets/6914ebcc2d5740aaaa59ba15?w=960"],
+
+["Dönərlər","Plov Üstü Toyuq Dönəri",6.50,"https://imageproxy.wolt.com/assets/6914ec2097dc9b47c09348fb?w=960"],
+
+["Dönərlər","Ət Dönəri Çörəkdə",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyzJ7WO5t-F68l4M-2w88h6N0bJRm-a-78qbQVVk8A5w&s"],
+
+["Dönərlər","Ət Dönəri Lavaşda",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN5Ac-BAUP8W5669WdWImhfKJly1Yo6l_EN7TJkV0ZJQ&s=10"],
+
+["Dönərlər","Ət Plov Üstü Dönəri",7.50,"https://imageproxy.wolt.com/assets/6a6a1e2efdf48864e0cc3304?w=960"],
+
+["Dönərlər","Ət Porsiyon Dönəri",7.50,"https://imageproxy.wolt.com/assets/6a6a1f50383847bab3f34c84?w=960"],
+
+["Dönərlər","Ət Şaurma Lavaşda",4.00,"https://imageproxy.wolt.com/menu/menu-images/63c003365adc4b191703961d/a4863312-927c-11ed-8fe5-c61e5c4bbce2_shaurma_et.jpg"],
+
+["Dönərlər","Ət Basdırma Dönər Çörəkdə",4.00,"https://imageproxy.wolt.com/assets/6a6a2300383847bab3f35180?w=960"],
+
+["Dönərlər","Ət İskəndər Dönəri",8.00,"https://imageproxy.wolt.com/assets/6a6a24b0383847bab3f3542a?w=960"],
+
+
+/* SƏRİN İÇKİLƏR */
+
+["Sərin içkilər","Fanta, Coca cola, Sprite, Pepsi Stəkan",0.80,"https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"],
+
+["Sərin içkilər","Fanta, Coca cola, Sprite, Pepsi 0.3L",1.20,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIDF4BimqAay-Er8BSsklSLyb0HS-HgltUWGHQM9j9XA&s=10"],
+
+["Sərin içkilər","Fanta, Coca cola, Sprite, Pepsi 0.5L",1.80,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvCQpUqyQtSfBXgtO0iYtpqx3L6mm3UbVWOhPDsiR_pQ&s=10"],
+
+["Sərin içkilər","Fanta, Coca cola, Sprite, Pepsi 1L",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtwMwS8ZWeI21Iy-o3bybUMfnZjhccgDJbJlW9ao-XTg&s=10"],
+
+["Sərin içkilər","Duşes / Tərxun 0.5L",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQICB3P7h4q38OxFyuJG3ARMXZxELHEfHfc6ESHyKrcqA&s=10"],
+
+["Sərin içkilər","Duşes / Tərxun Stəkan",0.80,"https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"],
+
+["Sərin içkilər","Soyuq çay banka",2.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSASHFn2DDn9ZMIK3aLt_8Vr0Egxgf94TPhj_Zty4gZ7g&s=10"],
+
+["Sərin içkilər","Cappy 0.5",2.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8jZZChYT9LlQ6LJHcoKIKTxQa6_jH_jxAKY5_g5QupA&s=10"],
+
+["Sərin içkilər","Cappy 1L",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX9VAxhjAMsWYBjAtxL8ppyWBabQ_WqzjZnnfbpBDmow&s=10"],
+
+["Sərin içkilər","Çöplü meyvə şirəsi",1.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpxzLA60DpiqcKOQeVOwpfj54_pG30AcizFY9s4iQ9tw&s=10"],
+
+["Sərin içkilər","Kompot",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrbu9rXRcJEryOftpdDiA2e8xCaneaWgqUQbgGPpuDEQ&s=10"],
+
+["Sərin içkilər","Ayran",0.80,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400"],
+
+["Sərin içkilər","Ayran Evsayağı Paket",1.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSfbty5xvznIviajLIyAJcbG9nOR_72msZofGkIxUu7g&s=10"],
+
+["Sərin içkilər","Ayran Stakan Paket",1.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB0FsEqEt5S1cNoDlBGLQ27fBh8jyuoDDchJS-qLoPcA&s=10"],
+
+
+/* KOKTEYLLƏR */
+
+["Kokteyllər","İce Coffee",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAptwpeBEzVgPTUrxhxA5rtixV71XBrQ8IIm1VCKf0Rw&s=10"],
+
+["Kokteyllər","Milkshakes Çiyələk",4.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdAVhmSgrGh62oaWqGhkWD90fDcKtyVNw6WIVzI59c1Q&s=10"],
+
+["Kokteyllər","Milkshakes Banan",4.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLfO9jmfx3Oc_WlGjTN0JnkWq_FjTmkTJTIQ5jl90uDA&s=10"],
+
+["Kokteyllər","Milkshakes Vanilla",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXAX3BKYJ7e0qmL1fvC83lYodlFThVpWJOzO_GTxd3GA&s=10"],
+
+["Kokteyllər","Milkshakes Bounty",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrZ645tlpBp8273e2nZDGeV3xiJHYIMiJzPr-bru9SCQ&s"],
+
+["Kokteyllər","Milkshakes Snickers",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnBlmdMjT_zYIXhFt1UEeJO64BqkyFMpF5I4qhGOfO3w&s=10"],
+
+["Kokteyllər","Milkshakes Oreo",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2fV-s6du1qSwSjGonkxYRJeHFbIP2UvpjLS0ukLpbPg&s=10"],
+
+["Kokteyllər","Milkshakes Caramel",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4fP8qltrifGe_X7_6L3LPrgIEC_oKFUVzt22UD52p2g&s=10"],
+
+["Kokteyllər","Milkshakes Şokolad",5.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_vmksl24xcqiYptZtj_V7E6rvzC6ugw-3tbmqAwsv7A&s=10"],
+
+["Kokteyllər","Moxito",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyGGQhBLtLzLzp4BYu8EhwBA7a-6RTSflvHt0-oFoo6A&s=10"],
+
+
+/* ÇAY */
+
+["Çay süfrəsi","Çay stəkan",0.50,"https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"],
+
+["Çay süfrəsi","Çay çaynik",2.00,"https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"],
+
+["Çay süfrəsi","Çay şokolad",5.00,"https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"],
+
+["Çay süfrəsi","Çay mürəbbə",5.00,"https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"],
+
+["Çay süfrəsi","Çay dəstgahı",6.00,"https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"],
+
+
+/* DESERTLƏR */
+
+["Desertlər","Şəki halvası",5.00,"https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+
+["Desertlər","Bamiyə",3.00,"https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+
+["Desertlər","Mindal",5.00,"https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+
+["Desertlər","Dondurma (3 top)",3.00,"https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400"],
+
+["Desertlər","Qoz mürəbbəsi",5.00,"https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+
+["Desertlər","Paxlava",1.00,"https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+
+["Desertlər","Türk paxlavası",0.80,"https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400"],
+
+
+/* KOFELƏR */
+
+["Kofelər","Kofe sadə",2.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAbD7JmkOvYTp1_vM3iBNnpU5F2LKuMMklnlyhGPMilQ&s"],
+
+["Kofelər","Südlü kofe",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAwgclU1uA8Xdqvk051EMVtxfV8Uym35zASn-tUiYtg&s=10"],
+
+["Kofelər","Cappucino",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhUBR-RbnEOQ7VLvC9NPIz41hSFIwLKu1hEgMkWvgnHQ&s=10"],
+
+["Kofelər","Latte",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxfeO5PGsjdYj8S42wcMWJTF3baXyifxppp5mZHMEJpA&s=10"],
+
+["Kofelər","İsti şokolad",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7IP14AEB_raD0UiBKtFiNuYHQ_FLXjWy-dfEUL2VXw&s=10"],
+
+
+/* SETLƏR */
+
+["Setlər","Burger Set (2 burger, 2 nugget, 2 fri, 2 cola)",30.40,"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"],
+
+["Setlər","Kabab Set (Lülə, tikə, semiçka, antrikot, toyuq kababı və s.)",39.50,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"]
+
+];
+
+
+/* SƏBƏT */
+
+var cart = {};
+
+
+/* KATEQORİYALAR */
+
+function initCategories() {
+
+    var cats = ["Hamısı"];
+
+    var i;
+
+    for(i = 0; i < products.length; i++) {
+
+        if(cats.indexOf(products[i][0]) === -1) {
+            cats.push(products[i][0]);
+        }
+
+    }
+
+    var html = "";
+
+    for(i = 0; i < cats.length; i++) {
+
+        var cat = cats[i];
+
+        var activeClass =
+            selectedCategory === cat ? "active" : "";
+
+        html +=
+            '<button class="cat-item ' +
+            activeClass +
+            '" onclick="selectCategory(' +
+            JSON.stringify(cat) +
+            ')">' +
+            cat +
+            '</button>';
+    }
+
+    document.getElementById("categoryList").innerHTML = html;
+}
+
+
+/* KATEQORİYA SEÇ */
+
+function selectCategory(cat) {
+
+    selectedCategory = cat;
+
+    initCategories();
+
+    renderMenu();
+}
+
+
+/* MENYU */
+
+function renderMenu() {
+
+    var input =
+        document.getElementById("searchInput");
+
+    var searchVal =
+        input.value.toLowerCase().trim();
+
+    var cats = [];
+
+    var i;
+
+    for(i = 0; i < products.length; i++) {
+
+        if(cats.indexOf(products[i][0]) === -1) {
+            cats.push(products[i][0]);
+        }
+
+    }
+
+    var html = "";
+
+    for(var k = 0; k < cats.length; k++) {
+
+        var cat = cats[k];
+
+        if(
+            selectedCategory !== "Hamısı" &&
+            selectedCategory !== cat
+        ) {
+            continue;
+        }
+
+        var itemsHtml = "";
+
+        for(var m = 0; m < products.length; m++) {
+
+            if(products[m][0] !== cat) {
+                continue;
+            }
+
+            if(
+                searchVal &&
+                products[m][1]
+                    .toLowerCase()
+                    .indexOf(searchVal) === -1
+            ) {
+                continue;
+            }
+
+            var qty = cart[m] || 0;
+
+            var actionBtn;
+
+            if(qty > 0) {
+
+                actionBtn =
+                    '<div class="counter">' +
+                    '<button onclick="changeQty(' + m + ',-1)">−</button>' +
+                    '<span>' + qty + '</span>' +
+                    '<button onclick="changeQty(' + m + ',1)">+</button>' +
+                    '</div>';
+
+            } else {
+
+                actionBtn =
+                    '<button class="add-btn" onclick="changeQty(' +
+                    m +
+                    ',1)">Səbətə at</button>';
+            }
+
+            itemsHtml +=
+                '<div class="product-card">' +
+
+                '<img src="' +
+                products[m][3] +
+                '" class="product-img" alt="' +
+                products[m][1] +
+                '" onerror="this.style.display=\'none\'">' +
+
+                '<div class="product-body">' +
+
+                '<div class="product-name">' +
+                products[m][1] +
+                '</div>' +
+
+                '<div class="product-price">' +
+                Number(products[m][2]).toFixed(2) +
+                ' AZN</div>' +
+
+                '</div>' +
+
+                '<div class="product-footer">' +
+                actionBtn +
+                '</div>' +
+
+                '</div>';
+        }
+
+        if(itemsHtml) {
+
+            html +=
+                '<div class="category-section">' +
+
+                '<div class="category-title">' +
+                cat +
+                '</div>' +
+
+                '<div class="products-grid">' +
+                itemsHtml +
+                '</div>' +
+
+                '</div>';
+        }
+    }
+
+    document.getElementById("menuContainer").innerHTML =
+        html ||
+        '<p style="text-align:center;color:#6b7280;padding:20px;">Heç nə tapılmadı</p>';
+}
+
+
+/* MİQDARI DƏYİŞ */
+
+function changeQty(index, delta) {
+
+    cart[index] =
+        (cart[index] || 0) + delta;
+
+    if(cart[index] <= 0) {
+        delete cart[index];
+    }
+
+    renderMenu();
+    renderCart();
+}
+
+
+/* SƏBƏT */
+
+function renderCart() {
+
+    var cartItemsEl =
+        document.getElementById("cartItems");
+
+    var keys = Object.keys(cart);
+
+    if(keys.length === 0) {
+
+        cartItemsEl.innerHTML =
+            '<div class="empty-cart">' +
+            'Səbətiniz hələ ki boşdur' +
+            '</div>';
+
+        document.getElementById("totalAmount")
+            .innerText = "0.00 AZN";
+
+        return;
+    }
+
+    var html = "";
+
+    var subtotal = 0;
+
+    for(var i = 0; i < keys.length; i++) {
+
+        var idx = keys[i];
+
+        var qty = cart[idx];
+
+        var item = products[idx];
+
+        var itemTotal =
+            item[2] * qty;
+
+        subtotal += itemTotal;
+
+        html +=
+            '<div class="cart-item">' +
+
+            '<div class="cart-item-info">' +
+
+            '<div><b>' +
+            item[1] +
+            '</b></div>' +
+
+            '<div style="color:#6b7280;font-size:12px;">' +
+            qty +
+            ' x ' +
+            Number(item[2]).toFixed(2) +
+            ' AZN</div>' +
+
+            '</div>' +
+
+            '<div class="cart-item-controls">' +
+
+            '<span>' +
+            itemTotal.toFixed(2) +
+            '</span>' +
+
+            '<button onclick="changeQty(' +
+            idx +
+            ',-' +
+            qty +
+            ')">×</button>' +
+
+            '</div>' +
+
+            '</div>';
+    }
+
+    cartItemsEl.innerHTML = html;
+
+    var deliveryFee =
+        parseFloat(
+            document.getElementById("deliveryZone").value
+        ) || 0;
+
+    var total =
+        subtotal + deliveryFee;
+
+    document.getElementById("totalAmount")
+        .innerText =
+        total.toFixed(2) + " AZN";
+}
+
+
+/* WHATSAPP SİFARİŞ */
+
+function sendOrder() {
+
+    var keys = Object.keys(cart);
+
+    if(keys.length === 0) {
+
+        alert("Səbətiniz boşdur!");
+
+        return;
+    }
+
+    var name =
+        document.getElementById("custName")
+            .value.trim();
+
+    var phone =
+        document.getElementById("custPhone")
+            .value.trim();
+
+    var address =
+        document.getElementById("custAddress")
+            .value.trim();
+
+    var note =
+        document.getElementById("custNote")
+            .value.trim();
+
+    if(!name || !phone || !address) {
+
+        alert(
+            "Zəhmət olmasa Ad, Əlaqə nömrəsi və Ünvan sahələrini doldurun!"
+        );
+
+        return;
+    }
+
+    var deliverySelect =
+        document.getElementById("deliveryZone");
+
+    var deliveryText =
+        deliverySelect.options[
+            deliverySelect.selectedIndex
+        ].text;
+
+    var deliveryFee =
+        parseFloat(deliverySelect.value) || 0;
+
+    var message =
+        "Salam, yeni sifariş var!\n\n";
+
+    message +=
+        "Müştəri: " +
+        name +
+        "\n";
+
+    message +=
+        "Telefon: " +
+        phone +
+        "\n";
+
+    message +=
+        "Ünvan: " +
+        address +
+        "\n";
+
+    if(note) {
+
+        message +=
+            "Qeyd: " +
+            note +
+            "\n";
+    }
+
+    message +=
+        "Çatdırılma: " +
+        deliveryText +
+        "\n\n";
+
+    message +=
+        "SİFARİŞLƏR:\n";
+
+    var subtotal = 0;
+
+    for(var i = 0; i < keys.length; i++) {
+
+        var idx = keys[i];
+
+        var qty = cart[idx];
+
+        var item = products[idx];
+
+        var itemTotal =
+            item[2] * qty;
+
+        subtotal += itemTotal;
+
+        message +=
+            "- " +
+            item[1] +
+            " (" +
+            qty +
+            " əd.) - " +
+            itemTotal.toFixed(2) +
+            " AZN\n";
+    }
+
+    var total =
+        subtotal + deliveryFee;
+
+    message +=
+        "\nCəmi məbləğ: " +
+        total.toFixed(2) +
+        " AZN";
+
+    var url =
+        "https://wa.me/" +
+        restaurantPhone +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(url, "_blank");
+}
+
+
+/* BAŞLANĞIC */
+
+initCategories();
+renderMenu();
+renderCart();
+
+</script>
+
+</body>
+</html>
