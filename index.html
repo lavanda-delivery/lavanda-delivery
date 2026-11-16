@@ -3,928 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lavanda Restoran - Şəki | Onlayn Sifariş</title>
+<meta name="theme-color" content="#40205f">
+<meta name="description" content="Lavanda Restoran Şəki — onlayn sifariş">
+<title>Lavanda Restoran | Şəki</title>
 <style>
-:root {
-    --primary-color: #6b3fa0;
-    --primary-hover: #583184;
-    --bg-color: #f8f9fa;
-    --card-bg: #ffffff;
-    --text-color: #333333;
-    --border-color: #e5e7eb;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.5; }
-
-/* Header */
-header { background: var(--primary-color); color: #fff; padding: 24px 16px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-header h1 { fo…
-[19:47, 2026-11-16] Lavanda Ailəvi Restoran: <!DOCTYPE html>
-<html lang="az">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lavanda Restoran - Şəki</title>
-
-<style>
-:root {
-  --primary:#6b3fa0;
-  --dark:#4d2878;
-  --bg:#f8f7fa;
-  --border:#e5e1eb;
-}
-
-* {box-sizing:border-box;margin:0;padding:0}
-
-body {
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:#333;
-  padding-bottom:85px;
-}
-
-/* LOGO */
-header {
-  background:linear-gradient(135deg,#4d2878,#8b5ab5);
-  color:white;
-  text-align:center;
-  padding:23px 12px;
-  box-shadow:0 3px 12px #0002;
-}
-
-.logo {
-  font-family:Georgia,serif;
-  font-size:30px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-
-.logo-line {
-  width:75px;
-  height:2px;
-  background:#e8d5ae;
-  margin:8px auto;
-}
-
-header p {
-  font-size:13px;
-  letter-spacing:2px;
-}
-
-/* LAYOUT */
-.container {
-  max-width:1250px;
-  margin:22px auto;
-  padding:0 15px;
-  display:grid;
-  grid-template-columns:230px 1fr 320px;
-  gap:18px;
-}
-
-.sidebar-categories,.sidebar-cart {
-  background:white;
-  border-radius:13px;
-  padding:16px;
-  height:fit-content;
-  box-shadow:0 2px 8px #00000008;
-}
-
-.sidebar-categories {
-  position:sticky;
-  top:15px;
-}
-
-h3 {
-  color:var(--primary);
-  font-size:16px;
-  margin-bottom:13px;
-  padding-bottom:9px;
-  border-bottom:2px solid var(--border);
-}
-
-.cat-list {
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.cat-item {
-  padding:11px;
-  border:0;
-  border-radius:8px;
-  text-align:left;
-  background:white;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.cat-item:hover,.cat-item.active {
-  background:var(--primary);
-  color:white;
-}
-
-/* MAIN */
-.main-content {
-  min-width:0;
-}
-
-.search-box {
-  margin-bottom:17px;
-}
-
-.search-box input {
-  width:100%;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:15px;
-  outline:none;
-}
-
-.search-box input:focus {
-  border-color:var(--primary);
-}
-
-/* CATEGORY HOME */
-.home-title {
-  font-size:21px;
-  color:var(--primary);
-  margin-bottom:15px;
-}
-
-.category-grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-
-.category-card {
-  background:white;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:25px 12px;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s;
-  box-shadow:0 2px 7px #00000008;
-}
-
-.category-card:hover {
-  transform:translateY(-3px);
-  border-color:var(--primary);
-}
-
-.category-icon {
-  font-size:35px;
-  margin-bottom:9px;
-}
-
-.category-card strong {
-  display:block;
-  color:var(--primary);
-  font-size:15px;
-}
-
-.category-card small {
-  color:#777;
-  display:block;
-  margin-top:5px;
-}
-
-/* PRODUCTS */
-.back-btn {
-  background:#eee7f5;
-  color:var(--primary);
-  border:0;
-  padding:10px 15px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-bottom:15px;
-}
-
-.category-title {
-  color:var(--primary);
-  font-size:19px;
-  margin-bottom:13px;
-}
-
-.products-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:13px;
-}
-
-.product-card {
-  background:white;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 2px 7px #00000008;
-}
-
-.product-img {
-  width:100%;
-  height:140px;
-  object-fit:cover;
-  background:#eee;
-}
-
-.product-body {
-  padding:11px;
-  flex:1;
-}
-
-.product-name {
-  font-size:14px;
-  font-weight:bold;
-  min-height:35px;
-}
-
-.product-price {
-  color:var(--primary);
-  font-weight:bold;
-  margin-top:7px;
-}
-
-.product-footer {
-  padding:0 10px 10px;
-}
-
-.add-btn {
-  width:100%;
-  padding:10px;
-  background:var(--primary);
-  color:white;
-  border:0;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.counter {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#f0eaf6;
-  padding:4px;
-  border-radius:8px;
-}
-
-.counter button {
-  background:var(--primary);
-  color:white;
-  border:0;
-  border-radius:6px;
-  width:32px;
-  height:30px;
-  font-size:18px;
-  cursor:pointer;
-}
-
-/* CART */
-.sidebar-cart {
-  position:sticky;
-  top:15px;
-}
-
-.cart-items {
-  max-height:260px;
-  overflow:auto;
-}
-
-.cart-item {
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  border-bottom:1px solid #eee;
-  padding:9px 0;
-  font-size:13px;
-}
-
-.cart-item-info {
-  flex:1;
-}
-
-.cart-item-controls button {
-  background:#e74c3c;
-  color:white;
-  border:0;
-  border-radius:5px;
-  padding:5px 9px;
-  cursor:pointer;
-}
-
-.empty-cart {
-  text-align:center;
-  color:#888;
-  padding:20px 0;
-  font-size:13px;
-}
-
-.checkout-form {
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-  margin-top:12px;
-  border-top:1px solid var(--border);
-  padding-top:12px;
-}
-
-.checkout-form input,
-.checkout-form select,
-.checkout-form textarea {
-  width:100%;
-  padding:11px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  font-size:13px;
-}
-
-.total-box {
-  display:flex;
-  justify-content:space-between;
-  font-weight:bold;
-  font-size:17px;
-  margin:8px 0;
-}
-
-.order-btn {
-  background:#25D366;
-  color:white;
-  border:0;
-  border-radius:8px;
-  padding:13px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* MOBILE CART BUTTON */
-.mobile-cart-toggle {
-  display:none;
-  position:fixed;
-  bottom:12px;
-  left:12px;
-  right:12px;
-  width:calc(100% - 24px);
-  background:var(--primary);
-  color:white;
-  border:0;
-  border-radius:12px;
-  padding:15px;
-  font-size:16px;
-  font-weight:bold;
-  z-index:100;
-  box-shadow:0 4px 15px #0003;
-  justify-content:space-between;
-  cursor:pointer;
-}
-
-.cart-backdrop {
-  display:none;
-}
-
-/* MOBILE */
-@media(max-width:950px) {
-  .container {
-    grid-template-columns:1fr;
-    gap:14px;
-  }
-
-  .sidebar-categories {
-    position:static;
-    order:1;
-  }
-
-  .main-content {
-    order:2;
-  }
-
-  .sidebar-cart {
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:202;
-    border-radius:18px 18px 0 0;
-    max-height:85vh;
-    overflow-y:auto;
-    padding:18px;
-    transform:translateY(110%);
-    transition:transform .3s ease;
-  }
-
-  body.cart-open .sidebar-cart {
-    transform:translateY(0);
-  }
-
-  .mobile-cart-toggle {
-    display:flex;
-    align-items:center;
-  }
-
-  .cart-backdrop {
-    display:block;
-    position:fixed;
-    inset:0;
-    background:#0007;
-    z-index:201;
-    opacity:0;
-    visibility:hidden;
-    transition:.2s;
-  }
-
-  body.cart-open .cart-backdrop {
-    opacity:1;
-    visibility:visible;
-  }
-
-  .cart-close {
-    float:right;
-    border:0;
-    background:#eee;
-    border-radius:7px;
-    padding:6px 10px;
-    cursor:pointer;
-  }
-
-  .products-grid {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .product-img {
-    height:125px;
-  }
-
-  .logo {
-    font-size:26px;
-  }
-}
-
-@media(max-width:380px) {
-  .products-grid {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-  }
-
-  .product-img {
-    height:105px;
-  }
-
-  .product-name {
-    font-size:12px;
-  }
-
-  .product-price {
-    font-size:13px;
-  }
-}
+:root{--purple:#542b78;--deep:#2b173d;--lilac:#eee5f5;--gold:#d7b56d;--ink:#211b26;--muted:#77717d;--paper:#faf8fb;--white:#fff;--line:#eee9f1;--green:#16834a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.topbar{background:var(--deep);color:#fff;padding:9px 18px;text-align:center;font-size:12px;letter-spacing:.5px}
+header{background:linear-gradient(120deg,#3b2054,#70439a);color:#fff;padding:22px max(18px,calc((100% - 1120px)/2)) 25px}
+.head{max-width:1120px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:48px;height:48px;border:1px solid #ffffff70;border-radius:16px;display:grid;place-items:center;font-size:26px;background:#ffffff12}
+.brand h1{font-family:Georgia,serif;font-size:25px;font-weight:500;margin:0;letter-spacing:.2px}.brand p{margin:4px 0 0;color:#e4d8ec;font-size:12px;letter-spacing:2px}
+.header-right{display:flex;align-items:center;gap:10px}.status{font-size:12px;color:#f0e8f5}.status:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#77d49b;margin-right:7px}
+.cart-head{border:1px solid #ffffff70;color:white;background:#ffffff16;border-radius:30px;padding:11px 16px;font-weight:650}
+.hero{max-width:1120px;margin:22px auto 0;padding:0 18px}.hero-card{overflow:hidden;border-radius:22px;background:linear-gradient(110deg,#f1e9f5,#e4d6ed);padding:28px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.hero h2{font-family:Georgia,serif;color:#3e2453;font-size:clamp(25px,4vw,38px);font-weight:500;margin:0 0 8px}.hero p{color:#685b70;margin:0;max-width:520px;line-height:1.55;font-size:14px}.hero-mark{font-size:70px;opacity:.8}
+main{max-width:1120px;margin:26px auto 70px;padding:0 18px;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:25px;align-items:start}
+.section-title{font-family:Georgia,serif;font-size:25px;font-weight:500;margin:0 0 15px;color:#352342}
+.tools{display:flex;gap:10px;margin-bottom:17px}.search{flex:1;position:relative}.search input{width:100%;border:1px solid #e4dce9;border-radius:13px;background:#fff;padding:13px 14px 13px 42px;outline:none}.search:before{content:"⌕";position:absolute;left:15px;top:6px;font-size:25px;color:#806a8d}.search input:focus{border-color:#9877ad;box-shadow:0 0 0 3px #542b7812}
+.category-list{display:flex;flex-wrap:wrap;gap:8px;overflow:visible;padding:2px 1px 13px;scrollbar-width:thin}.cat{white-space:nowrap;border:1px solid #e8e0ed;background:#fff;color:#5e5068;border-radius:30px;padding:9px 14px;font-size:13px}.cat.active,.cat:hover{background:var(--purple);border-color:var(--purple);color:white}
+.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.product{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 5px 18px #34204408;display:flex;flex-direction:column;min-width:0}
+.food-art{height:116px;background:radial-gradient(circle at 70% 20%,#fff8 0 5%,transparent 25%),linear-gradient(135deg,#f2e9f5,#e6d8ed);display:grid;place-items:center;font-size:48px}
+.product-body{padding:13px;display:flex;flex-direction:column;flex:1}.product h3{font-size:15px;line-height:1.35;margin:0 0 6px}.product p{font-size:12px;line-height:1.45;color:var(--muted);margin:0 0 12px;min-height:17px}.product-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.price{font-weight:750;color:#4d286b;font-size:15px;white-space:nowrap}.add{border:0;background:var(--purple);color:white;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:700}.add:active{transform:scale(.97)}
+.notice{background:#fff;border:1px dashed #d8c9e1;border-radius:15px;padding:18px;color:#6d6075;font-size:13px;line-height:1.55;margin-top:15px}
+.cart-panel{position:sticky;top:15px;background:#fff;border:1px solid var(--line);border-radius:19px;padding:19px;box-shadow:0 8px 26px #3420440b}.cart-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.cart-title h2{font-family:Georgia,serif;font-weight:500;font-size:22px;margin:0}.count{background:var(--lilac);color:var(--purple);font-weight:700;border-radius:30px;padding:5px 9px;font-size:12px}
+.empty{text-align:center;padding:23px 8px;color:#918798;font-size:13px}.empty span{display:block;font-size:34px;margin-bottom:8px}
+.cart-items{display:grid;gap:12px;max-height:260px;overflow:auto}.cart-row{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px}.cart-row strong{font-size:13px;line-height:1.35}.cart-row small{display:block;color:var(--muted);margin-top:4px}.qty{display:flex;align-items:center;gap:8px}.qty button{width:25px;height:25px;border:1px solid #e5dce9;background:#fff;border-radius:8px;color:var(--purple);font-weight:700}.qty b{font-size:12px;min-width:10px;text-align:center}
+.total{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:15px;padding-top:14px;font-weight:750}.total strong{color:var(--purple);font-size:18px}
+.checkout{margin-top:16px;display:grid;gap:10px}.field label{display:block;font-size:11px;font-weight:700;color:#6c6073;margin:0 0 5px}.field input,.field textarea,.field select{width:100%;border:1px solid #e6dfe9;border-radius:10px;padding:11px 12px;background:#fff;outline:none;font-size:13px}.field input:focus,.field textarea:focus,.field select:focus{border-color:#9877ad}.field textarea{min-height:65px;resize:vertical}
+.delivery{display:grid;grid-template-columns:1fr 1fr;gap:7px}.delivery label{border:1px solid #e6dfe9;border-radius:10px;padding:10px 8px;text-align:center;font-size:12px;cursor:pointer}.delivery input{accent-color:var(--purple);width:auto;margin:0 4px 0 0}
+.send{border:0;background:#16834a;color:white;padding:14px;border-radius:12px;font-weight:750}.send:disabled{opacity:.45;cursor:not-allowed}.cart-hint{font-size:10px;color:#958b9b;line-height:1.45;text-align:center;margin:0}
+footer{background:#281637;color:#e9deef;padding:27px 18px;text-align:center;font-size:12px}footer strong{font-family:Georgia,serif;font-size:18px;font-weight:500;display:block;margin-bottom:6px}
+.mobile-cart{display:none}
+@media(max-width:800px){main{grid-template-columns:1fr;gap:18px}.cart-panel{position:static}.hero{margin-top:14px}.hero-card{padding:22px}.hero-mark{font-size:52px}.head{align-items:flex-start}.status{display:none}}
+@media(max-width:480px){.category-list{flex-wrap:nowrap;overflow-x:auto;padding-bottom:14px}.cat{flex:0 0 auto}header{padding:17px 15px 20px}.brand h1{font-size:21px}.logo{width:42px;height:42px}.cart-head{padding:9px 12px;font-size:12px}.hero{padding:0 12px}.hero-card{border-radius:17px;padding:19px}.hero-mark{font-size:40px}.hero p{font-size:12px}.hero h2{font-size:25px}main{padding:0 12px;margin-top:21px}.menu-grid{gap:9px}.food-art{height:90px;font-size:39px}.product-body{padding:10px}.product h3{font-size:13px}.product p{font-size:11px}.price{font-size:13px}.add{padding:8px 9px;font-size:11px}.cart-panel{padding:16px}}
 </style>
 </head>
-
 <body>
-
-<header>
-  <div class="logo">Lavanda Restoran</div>
-  <div class="logo-line"></div>
-  <p>ŞƏKİ • ONLAYN SİFARİŞ</p>
-</header>
-
-<div class="container">
-
-  <div class="sidebar-categories">
-    <h3>Kateqoriyalar</h3>
-    <div id="categoryList" class="cat-list"></div>
+<div class="topbar">ŞƏKİ • LAVANDA RESTORAN • ONLAYN SİFARİŞ</div>
+<header><div class="head">
+  <div class="brand"><div class="logo">✿</div><div><h1>Lavanda Restoran</h1><p>ŞƏKİ · DADIN ÜNVANI</p></div></div>
+  <div class="header-right"><span class="status">Onlayn sifariş</span><button class="cart-head" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Səbət <span id="headCount">0</span></button></div>
+</div></header>
+<section class="hero"><div class="hero-card"><div><h2>Dadlı anlar, bir klik uzaqda.</h2><p>Sevdiyiniz yeməkləri seçin, sifarişinizi səbətə əlavə edin və WhatsApp vasitəsilə bizə göndərin.</p></div><div class="hero-mark">🍽️</div></div></section>
+<main>
+<section>
+  <h2 class="section-title">Menyumuz</h2>
+  <div class="tools"><div class="search"><input id="search" type="search" placeholder="Yemək axtar..." oninput="renderMenu()"></div></div>
+  <div class="category-list" id="categories">
+    <button class="cat active" type="button" onclick="chooseCategory('HAMISI')">Hamısı</button>
+    <button class="cat" type="button" onclick="chooseCategory('ƏLAVƏ SƏHƏR YEMƏKLƏRİ')">Əlavə səhər yeməkləri</button>
+    <button class="cat" type="button" onclick="chooseCategory('SALATLAR')">Salatlar</button>
+    <button class="cat" type="button" onclick="chooseCategory('ŞORBALAR')">Şorbalar</button>
+    <button class="cat" type="button" onclick="chooseCategory('QARNİRLƏR')">Qarnirlər</button>
+    <button class="cat" type="button" onclick="chooseCategory('FAST FOOD')">Fast food</button>
+    <button class="cat" type="button" onclick="chooseCategory('DÖNƏRLƏR')">Dönərlər</button>
+    <button class="cat" type="button" onclick="chooseCategory('İSTİ YEMƏKLƏR')">İsti yeməklər</button>
+    <button class="cat" type="button" onclick="chooseCategory('SACLAR')">Saclar</button>
+    <button class="cat" type="button" onclick="chooseCategory('BALIQ YEMƏKLƏRİ')">Balıq yeməkləri</button>
+    <button class="cat" type="button" onclick="chooseCategory('KABABLAR')">Kab ablar</button>
+    <button class="cat" type="button" onclick="chooseCategory('XƏMİR YEMƏKLƏRİ')">Xəmir yeməkləri</button>
+    <button class="cat" type="button" onclick="chooseCategory('PİZZALAR')">Pizzalar</button>
+    <button class="cat" type="button" onclick="chooseCategory('PİDƏ VƏ LAHMACUNLAR')">Pidə və lahmacunlar</button>
+    <button class="cat" type="button" onclick="chooseCategory('DESERTLƏR')">Desertlər</button>
+    <button class="cat" type="button" onclick="chooseCategory('SƏRİN İÇKİLƏR')">Sərin içkilər</button>
+    <button class="cat" type="button" onclick="chooseCategory('KOKTEYLLƏR')">Kokteyllər</button>
+    <button class="cat" type="button" onclick="chooseCategory('QƏHVƏLƏR')">Qəhvələr</button>
+    <button class="cat" type="button" onclick="chooseCategory('SETLƏR')">Setlər</button>
   </div>
-
-  <div class="main-content">
-
-    <div class="search-box">
-      <input
-        type="text"
-        id="searchInput"
-        oninput="handleSearch()"
-        placeholder="Yemək axtar..."
-      >
-    </div>
-
-    <div id="menuContainer"></div>
-
+  <div class="menu-grid" id="menu"></div>
+  <div class="notice">Menyu məlumatları əvvəl təqdim edilmiş Wolt ixrac faylında görünən məhsullara əsaslanır. Digər kateqoriyaların tam məhsul siyahısı və şəkilləri əlavə menyu faylı alındıqdan sonra yerləşdiriləcək.</div>
+</section>
+<aside class="cart-panel" id="cart">
+  <div class="cart-title"><h2>🛒 Səbətiniz</h2><span class="count" id="count">0 məhsul</span></div>
+  <div id="cartItems" class="empty"><span>🛍️</span>Səbətiniz hələ boşdur</div>
+  <div class="total"><span>Yekun məbləğ</span><strong id="total">0.00 AZN</strong></div>
+  <div class="checkout">
+    <div class="field"><label>ÇATDIRILMA NÖVÜ</label><div class="delivery">
+      <label><input type="radio" name="delivery" value="Şəhərdaxili çatdırılma" checked> Çatdırılma</label>
+      <label><input type="radio" name="delivery" value="Özü gəlib götürmə"> Gəlib götürmə</label>
+    </div></div>
+    <div class="field"><label for="customer">AD SOYAD</label><input id="customer" placeholder="Adınız və soyadınız" autocomplete="name"></div>
+    <div class="field"><label for="phone">ƏLAQƏ NÖMRƏSİ</label><input id="phone" type="tel" placeholder="05X XXX XX XX" autocomplete="tel"></div>
+    <div class="field"><label for="address">ÇATDIRILMA ÜNVANI</label><input id="address" placeholder="Ünvanınız (götürmə seçilibsə boş qala bilər)"></div>
+    <div class="field"><label for="note">QEYD (İSTƏYƏ GÖRƏ)</label><textarea id="note" placeholder="Sifarişlə bağlı əlavə qeyd..."></textarea></div>
+    <button class="send" id="send" onclick="sendOrder()" disabled>WhatsApp ilə sifariş et →</button>
+    <p class="cart-hint">Sifariş WhatsApp-da açılacaq. Göndərməzdən əvvəl məlumatları yoxlaya bilərsiniz.</p>
   </div>
-
-  <div class="sidebar-cart" id="cartPanel">
-
-    <button class="cart-close" onclick="toggleCart(false)">✕ Bağla</button>
-
-    <h3>🛒 Səbətiniz</h3>
-
-    <div id="cartItems" class="cart-items">
-      <div class="empty-cart">Səbətiniz boşdur</div>
-    </div>
-
-    <div class="checkout-form">
-
-      <label>Çatdırılma növü:</label>
-
-      <select id="deliveryZone" onchange="renderCart()">
-        <option value="0">Şəhərdaxili (Pulsuz)</option>
-        <option value="2">Şəhərdən kənar (+2.00 AZN)</option>
-      </select>
-
-      <div class="total-box">
-        <span>Cəmi:</span>
-        <span id="totalAmount">0.00 AZN</span>
-      </div>
-
-      <input id="custName" placeholder="Adınız və Soyadınız">
-      <input id="custPhone" type="tel" placeholder="Əlaqə nömrəniz">
-      <input id="custAddress" placeholder="Çatdırılma ünvanı">
-      <textarea id="custNote" placeholder="Qeyd (istəyə görə)" rows="2"></textarea>
-
-      <button class="order-btn" onclick="sendOrder()">
-        WhatsApp ilə sifariş et
-      </button>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="cart-backdrop" onclick="toggleCart(false)"></div>
-
-<button class="mobile-cart-toggle" onclick="toggleCart(true)">
-  <span>🛒 Səbətə bax (<span id="cartCount">0</span>)</span>
-  <span id="mobileTotal">0.00 AZN</span>
-</button>
-
+</aside>
+</main>
+<footer><strong>Lavanda Restoran</strong>Şəki, Azərbaycan · Sifarişlər WhatsApp vasitəsilə qəbul edilir</footer>
 <script>
-
-var restaurantPhone = "994558886383";
-
-var selectedCategory = null;
-
-var products = [
-
-  ["Səhər yeməkləri","Səhər Yeməyi Seti (1 nəfər üçün)",10.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XBIYXqKhyXSOmKZOPahzqYMadCigo9UEpKyKMkx6MA&s"],
-  ["Səhər yeməkləri","Qlazok",2.50,"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400"],
-  ["Səhər yeməkləri","Qayğanaq",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-zC5lESt_7nxq_lJLIOGU6u533efaiPUs6sZHcnHFEA&s=10"],
-  ["Səhər yeməkləri","Pomidor yumurta",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOPqAJnNdtA-qbDEzg1tAAYGzf7Ssqd8OJlV4YbUk5yw&s=10"],
-  ["Səhər yeməkləri","Kükü",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCyndA8-B3x2AQClX-8_bQuP6JNfifve2dXmeHwMiFRQ&s=10"],
-  ["Səhər yeməkləri","Sosiska",3.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkif-b--fPubSoeckJV_V3RWSntMzpS0z7mc5lPeZ4lg&s"],
-  ["Səhər yeməkləri","Sosiska yumurta",4.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGvUx8jIPu7g3Z1qTzKd0nAu7wpBDS74JavIXvXr5WiQ&s"],
-  ["Səhər yeməkləri","Tərəvəzli omlet",3.50,"https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400"],
-
-  ["Kofelər","Kofe sadə",2.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAbD7JmkOvYTp1_vM3iBNnpU5F2LKuMMklnlyhGPMilQ&s"],
-  ["Kofelər","Südlü kofe",3.00,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAwgclU1uA8Xdqvk051EMVtxfV8Uym35zASn-tUiYtg&s=10"],
-  ["Kofelər","Cappucino",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhUBR-RbnEOQ7VLvC9NPIz41hSFIwLKu1hEgMkWvgnHQ&s=10"],
-  ["Kofelər","Latte",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxfeO5PGsjdYj8S42wcMWJTF3baXyifxppp5mZHMEJpA&s=10"],
-  ["Kofelər","İsti şokolad",2.50,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7IP14AEB_raD0UiBKtFiNuYHQ_FLXjWy-dfEUL2VXw&s=10"]
-
+const WHATSAPP="994558886383";
+const categories=[
+ "ƏLAVƏ SƏHƏR YEMƏKLƏRİ","SALATLAR","ŞORBALAR","QARNİRLƏR",
+ "FAST FOOD","DÖNƏRLƏR","İSTİ YEMƏKLƏR","SACLAR","BALIQ YEMƏKLƏRİ",
+ "KABABLAR","XƏMİR YEMƏKLƏRİ","PİZZALAR","PİDƏ VƏ LAHMACUNLAR",
+ "DESERTLƏR","SƏRİN İÇKİLƏR","KOKTEYLLƏR","QƏHVƏLƏR","SETLƏR"
 ];
-
-var cart = {};
-
-function getCategories() {
-  var cats = [];
-
-  products.forEach(function(p) {
-    if(!cats.includes(p[0])) cats.push(p[0]);
-  });
-
-  return cats;
+const products=[
+ {id:1,cat:"FAST FOOD",name:"Toyuq Çubuqları (5 əd) + Kartof Fri",desc:"5 ədəd toyuq ətindən çubuqlar",price:7.00,emoji:"🍗"},
+ {id:2,cat:"FAST FOOD",name:"Toyuq Budu (2 əd) + Kartof Fri",desc:"",price:7.50,emoji:"🍗"},
+ {id:3,cat:"FAST FOOD",name:"Klab Sendviç + Kartof Fri",desc:"",price:9.50,emoji:"🥪"},
+ {id:4,cat:"FAST FOOD",name:"KFC Qanadları (3 əd) + Kartof Fri",desc:"",price:7.50,emoji:"🍗"},
+ {id:5,cat:"FAST FOOD",name:"Acılı Toyuq Qanadları (3 əd) + Kartof Fri",desc:"",price:7.50,emoji:"🌶️"},
+ {id:6,cat:"FAST FOOD",name:"Toyuq Langeti + Kartof Fri",desc:"",price:9.50,emoji:"🍟"},
+ {id:7,cat:"FAST FOOD",name:"Toyuq Şnitsel + Kartof Fri",desc:"",price:9.00,emoji:"🍽️"},
+ {id:8,cat:"FAST FOOD",name:"Sucuqlu Tost + Kartof Fri",desc:"",price:6.50,emoji:"🥪"},
+ {id:9,cat:"FAST FOOD",name:"Kartof Fri",desc:"",price:4.00,emoji:"🍟"},
+ {id:10,cat:"FAST FOOD",name:"Naqqets (5 əd) + Kartof Fri",desc:"",price:6.00,emoji:"🍗"},
+ {id:11,cat:"DÖNƏRLƏR",name:"Toyuqlu Şaurma Lavaşda",desc:"Toyuq əti, kartof, turşu xiyar, şaurma sousu",price:4.00,emoji:"🌯"},
+ {id:12,cat:"DÖNƏRLƏR",name:"Toyuqlu İskəndər Dönəri",desc:"Toyuq, qatıq, pomidor, bibər",price:6.50,emoji:"🥙"},
+ {id:13,cat:"DÖNƏRLƏR",name:"Toyuq Dönəri Çörəkdə",desc:"Toyuq əti, pomidor, xiyar, mayonez",price:3.00,emoji:"🥙"},
+ {id:14,cat:"DÖNƏRLƏR",name:"Toyuq Dönəri Lavaşda",desc:"Toyuq əti, pomidor, xiyar, mayonez",price:3.50,emoji:"🌯"}
+];
+let active="HAMISI",cart={};
+const money=n=>n.toFixed(2)+" AZN";
+function renderCategories(){
+ const cats=["HAMISI",...categories];
+ document.getElementById("categories").innerHTML=cats.map(c=><button class="cat ${c===active?'active':''}" onclick="chooseCategory('${c}')">${c==="HAMISI"?"Hamısı":c}</button>).join("");
 }
-
-/* CATEGORY LIST */
-
-function initCategories() {
-
-  var cats = getCategories();
-  var html = "";
-
-  cats.forEach(function(cat) {
-
-    html += `
-      <button class="cat-item ${selectedCategory === cat ? "active" : ""}"
-        onclick="selectCategory('${cat}')">
-        ${cat}
-      </button>
-    `;
-
-  });
-
-  document.getElementById("categoryList").innerHTML = html;
+function chooseCategory(c){active=c;renderCategories();renderMenu()}
+function renderMenu(){
+ const q=document.getElementById("search").value.trim().toLocaleLowerCase("az");
+ const list=products.filter(p=>(active==="HAMISI"||p.cat===active)&&(${p.name} ${p.desc}).toLocaleLowerCase("az").includes(q));
+ document.getElementById("menu").innerHTML=list.length?list.map(p=><article class="product"><div class="food-art">${p.emoji}</div><div class="product-body"><h3>${p.name}</h3><p>${p.desc||"&nbsp;"}</p><div class="product-foot"><span class="price">${money(p.price)}</span><button class="add" onclick="add(${p.id})">+ Səbətə at</button></div></div></article>).join(""):<div class="notice">Bu axtarışa uyğun məhsul tapılmadı.</div>;
 }
-
-/* CATEGORY HOME */
-
-function renderHome() {
-
-  selectedCategory = null;
-  initCategories();
-
-  var cats = getCategories();
-
-  var icons = {
-    "Səhər yeməkləri":"🍳",
-    "Kofelər":"☕"
-  };
-
-  var html = `
-    <h2 class="home-title">Kateqoriyalar</h2>
-    <div class="category-grid">
-  `;
-
-  cats.forEach(function(cat) {
-
-    var count = products.filter(function(p) {
-      return p[0] === cat;
-    }).length;
-
-    html += `
-      <div class="category-card" onclick="selectCategory('${cat}')">
-        <div class="category-icon">${icons[cat] || "🍽️"}</div>
-        <strong>${cat}</strong>
-        <small>${count} məhsul</small>
-      </div>
-    `;
-
-  });
-
-  html += "</div>";
-
-  document.getElementById("menuContainer").innerHTML = html;
+function add(id){cart[id]=(cart[id]||0)+1;renderCart()}
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];renderCart()}
+function renderCart(){
+ const entries=Object.entries(cart).map(([id,q])=>({p:products.find(x=>x.id==id),q}));
+ const qty=entries.reduce((s,x)=>s+x.q,0),total=entries.reduce((s,x)=>s+x.p.price*x.q,0);
+ document.getElementById("count").textContent=qty+" məhsul";
+ document.getElementById("headCount").textContent=qty;
+ document.getElementById("total").textContent=money(total);
+ document.getElementById("send").disabled=!qty;
+ document.getElementById("cartItems").className=entries.length?"cart-items":"empty";
+ document.getElementById("cartItems").innerHTML=entries.length?entries.map(({p,q})=><div class="cart-row"><div><strong>${p.name}</strong><small>${money(p.price*q)}</small></div><div class="qty"><button onclick="change(${p.id},-1)">−</button><b>${q}</b><button onclick="change(${p.id},1)">+</button></div></div>).join(""):'<span>🛍️</span>Səbətiniz hələ boşdur';
 }
-
-/* SELECT CATEGORY */
-
-function selectCategory(cat) {
-
-  selectedCategory = cat;
-
-  document.getElementById("searchInput").value = "";
-
-  initCategories();
-  renderMenu();
-
-  window.scrollTo({top:0,behavior:"smooth"});
+function sendOrder(){
+ const entries=Object.entries(cart).map(([id,q])=>({p:products.find(x=>x.id==id),q}));
+ if(!entries.length)return;
+ const name=document.getElementById("customer").value.trim();
+ const phone=document.getElementById("phone").value.trim();
+ const address=document.getElementById("address").value.trim();
+ const delivery=document.querySelector('input[name="delivery"]:checked').value;
+ if(!name||!phone){alert("Zəhmət olmasa adınızı və əlaqə nömrənizi yazın.");return}
+ if(delivery==="Şəhərdaxili çatdırılma"&&!address){alert("Çatdırılma ünvanını qeyd edin.");return}
+ const total=entries.reduce((s,x)=>s+x.p.price*x.q,0);
+ let msg="Salam, Lavanda Restorandan sifariş vermək istəyirəm.\n\n";
+ entries.forEach(({p,q})=>msg+=${p.name} — ${q} ədəd — ${money(p.price*q)}\n);
+ msg+=\nYekun: ${money(total)}\nÇatdırılma: ${delivery}\nAd: ${name}\nƏlaqə: ${phone};
+ if(address)msg+=\nÜnvan: ${address};
+ const note=document.getElementById("note").value.trim();if(note)msg+=\nQeyd: ${note};
+ window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");
 }
-
-/* MENU */
-
-function renderMenu() {
-
-  var html = `
-    <button class="back-btn" onclick="renderHome()">
-      ← Kateqoriyalara qayıt
-    </button>
-    <h2 class="category-title">${selectedCategory}</h2>
-    <div class="products-grid">
-  `;
-
-  products.forEach(function(p,index) {
-
-    if(p[0] !== selectedCategory) return;
-
-    var qty = cart[index] || 0;
-
-    var button = qty > 0
-      ? `
-        <div class="counter">
-          <button onclick="changeQty(${index},-1)">−</button>
-          <span>${qty}</span>
-          <button onclick="changeQty(${index},1)">+</button>
-        </div>
-      `
-      : `
-        <button class="add-btn" onclick="changeQty(${index},1)">
-          + Səbətə at
-        </button>
-      `;
-
-    html += `
-      <div class="product-card">
-        <img src="${p[3]}" class="product-img" alt="${p[1]}"
-          loading="lazy">
-        <div class="product-body">
-          <div class="product-name">${p[1]}</div>
-          <div class="product-price">${p[2].toFixed(2)} AZN</div>
-        </div>
-        <div class="product-footer">
-          ${button}
-        </div>
-      </div>
-    `;
-
-  });
-
-  html += "</div>";
-
-  document.getElementById("menuContainer").innerHTML = html;
-}
-
-/* SEARCH */
-
-function handleSearch() {
-
-  var value = document.getElementById("searchInput").value
-    .trim().toLowerCase();
-
-  if(!value) {
-    if(selectedCategory) renderMenu();
-    else renderHome();
-    return;
-  }
-
-  var html = `
-    <h2 class="category-title">Axtarış nəticələri</h2>
-    <div class="products-grid">
-  `;
-
-  var found = false;
-
-  products.forEach(function(p,index) {
-
-    if(!p[1].toLowerCase().includes(value) &&
-       !p[0].toLowerCase().includes(value)) return;
-
-    found = true;
-
-    var qty = cart[index] || 0;
-
-    html += `
-      <div class="product-card">
-        <img src="${p[3]}" class="product-img" alt="${p[1]}">
-        <div class="product-body">
-          <div class="product-name">${p[1]}</div>
-          <div class="product-price">${p[2].toFixed(2)} AZN</div>
-          <small>${p[0]}</small>
-        </div>
-        <div class="product-footer">
-          ${qty > 0
-            ? `<div class="counter">
-                <button onclick="changeQty(${index},-1)">−</button>
-                <span>${qty}</span>
-                <button onclick="changeQty(${index},1)">+</button>
-               </div>`
-            : <button class="add-btn" onclick="changeQty(${index},1)">+ Səbətə at</button>
-          }
-        </div>
-      </div>
-    `;
-
-  });
-
-  html += "</div>";
-
-  document.getElementById("menuContainer").innerHTML =
-    found ? html : '<div class="empty-cart">Məhsul tapılmadı.</div>';
-}
-
-/* QUANTITY */
-
-function changeQty(index,delta) {
-
-  cart[index] = (cart[index] || 0) + delta;
-
-  if(cart[index] <= 0) delete cart[index];
-
-  if(selectedCategory) {
-    renderMenu();
-  } else if(document.getElementById("searchInput").value.trim()) {
-    handleSearch();
-  }
-
-  renderCart();
-}
-
-/* CART */
-
-function renderCart() {
-
-  var keys = Object.keys(cart);
-  var html = "";
-  var subtotal = 0;
-  var count = 0;
-
-  keys.forEach(function(idx) {
-
-    var p = products[idx];
-    var qty = cart[idx];
-    var sum = p[2] * qty;
-
-    subtotal += sum;
-    count += qty;
-
-    html += `
-      <div class="cart-item">
-        <div class="cart-item-info">
-          <strong>${p[1]}</strong><br>
-          <small>${qty} x ${p[2].toFixed(2)} AZN = ${sum.toFixed(2)} AZN</small>
-        </div>
-        <div class="cart-item-controls">
-          <button onclick="changeQty(${idx},-1)">−</button>
-          <button onclick="changeQty(${idx},1)" style="background:#6b3fa0">+</button>
-          <button onclick="changeQty(${idx},-${qty})">✕</button>
-        </div>
-      </div>
-    `;
-
-  });
-
-  document.getElementById("cartItems").innerHTML =
-    html || '<div class="empty-cart">Səbətiniz boşdur</div>';
-
-  var fee = parseFloat(document.getElementById("deliveryZone").value);
-  var total = subtotal + fee;
-
-  document.getElementById("totalAmount").innerText =
-    total.toFixed(2) + " AZN";
-
-  document.getElementById("cartCount").innerText = count;
-
-  document.getElementById("mobileTotal").innerText =
-    total.toFixed(2) + " AZN";
-}
-
-/* MOBILE CART */
-
-function toggleCart(open) {
-
-  document.body.classList.toggle("cart-open",open);
-
-}
-
-/* WHATSAPP ORDER */
-
-function sendOrder() {
-
-  var keys = Object.keys(cart);
-
-  if(keys.length === 0) {
-    alert("Səbətiniz boşdur!");
-    return;
-  }
-
-  var name = document.getElementById("custName").value.trim();
-  var phone = document.getElementById("custPhone").value.trim();
-  var address = document.getElementById("custAddress").value.trim();
-  var note = document.getElementById("custNote").value.trim();
-
-  if(!name || !phone || !address) {
-    alert("Adınızı, telefonunuzu və ünvanınızı qeyd edin!");
-    return;
-  }
-
-  var select = document.getElementById("deliveryZone");
-  var deliveryText = select.options[select.selectedIndex].text;
-  var fee = parseFloat(select.value);
-
-  var message = "🛎️ Yeni Sifariş - Lavanda Restoran\n\n";
-
-  message += "👤 Müştəri: " + name + "\n";
-  message += "📞 Telefon: " + phone + "\n";
-  message += "📍 Ünvan: " + address + "\n";
-
-  if(note) message += "📝 Qeyd: " + note + "\n";
-
-  message += "🚚 Çatdırılma: " + deliveryText + "\n\n";
-  message += "🛒 Sifariş olunan məhsullar:\n";
-
-  var subtotal = 0;
-
-  keys.forEach(function(idx) {
-
-    var p = products[idx];
-    var sum = p[2] * cart[idx];
-
-    subtotal += sum;
-
-    message += "- " + p[1] + " (" + cart[idx] +
-      " əd.) - " + sum.toFixed(2) + " AZN\n";
-
-  });
-
-  message += "\n💰 Yekun məbləğ: " +
-    (subtotal + fee).toFixed(2) + " AZN";
-
-  var url = "https://wa.me/" + restaurantPhone +
-    "?text=" + encodeURIComponent(message);
-
-  window.open(url,"_blank");
-
-}
-
-/* START */
-
-initCategories();
-renderHome();
-renderCart();
-
+renderCategories();renderMenu();renderCart();
 </script>
-
 </body>
 </html>
